@@ -1,6 +1,14 @@
 package KimuraStore.Dao;
 
-public class ProductDao {
+import KimuraStore.Dto.MapperProductDto;
+import KimuraStore.Dto.ProductDto;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
+public class ProductDao extends BaseDao{
     private final boolean YES = true;
     private final boolean NO = false;
 
@@ -12,7 +20,9 @@ public class ProductDao {
         sql.append("name, ");
         sql.append("deltail, ");
         sql.append("discount, ");
-        sql.append("highlight, ");
+        sql.append("discount_rate, ");
+        sql.append("discount_money, ");
+        sql.append("new_product, ");
         sql.append("price, ");
         sql.append("create_at, ");
         sql.append("modify_at, ");
@@ -24,7 +34,7 @@ public class ProductDao {
     private String sqlNewProduct() {
         StringBuffer sql =  sqlString();
         sql.append("WHERE 1 = 1 ");
-        sql.append("AND highlight = 1 ");
+        sql.append("AND new_product = 1 ");
         sql.append("ORDER BY RAND() ");
         sql.append("LIMIT 6 ");
         return sql.toString();
@@ -39,4 +49,24 @@ public class ProductDao {
         return sql.toString();
     }
 
+    public List<ProductDto> GetNewProduct() {
+        List<ProductDto> list = new ArrayList<ProductDto>();
+        String sql = sqlNewProduct();
+        list = _jdbcTemplate.query(sql, new MapperProductDto());
+        return list;
+    }
+
+    public List<ProductDto> GetDiscountProduct() {
+        List<ProductDto> list = new ArrayList<ProductDto>();
+        String sql = sqlDiscountProduct();
+        list = _jdbcTemplate.query(sql, new MapperProductDto());
+        return list;
+    }
+
+    public List<ProductDto> GetDataProduct() {
+        List<ProductDto> list = new ArrayList<ProductDto>();
+        String sql = sqlString().toString();
+        list = _jdbcTemplate.query(sql, new MapperProductDto());
+        return list;
+    }
 }

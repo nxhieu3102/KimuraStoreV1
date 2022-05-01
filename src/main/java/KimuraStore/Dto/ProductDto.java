@@ -8,11 +8,22 @@ public class ProductDto {
     private String name;
     private String deltail;
     private boolean discount;
-    private boolean highlight;
+    private double discount_rate;
+    private double discount_money;
+    private boolean new_product;
     private double price;
     private Date create_at;
     private Date modify_at;
+
     private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public ProductDto() {
         super();
@@ -58,12 +69,28 @@ public class ProductDto {
         this.discount = discount;
     }
 
-    public boolean isHighlight() {
-        return highlight;
+    public double getDiscount_rate() {
+        return discount_rate;
     }
 
-    public void setHighlight(boolean highlight) {
-        this.highlight = highlight;
+    public void setDiscount_rate(double discount_rate) {
+        this.discount_rate = discount_rate;
+    }
+
+    public double getDiscount_money() {
+        return discount_money;
+    }
+
+    public void setDiscount_money(double discount_money) {
+        this.discount_money = discount_money;
+    }
+
+    public boolean isNew_product() {
+        return new_product;
+    }
+
+    public void setNew_product(boolean new_product) {
+        this.new_product = new_product;
     }
 
     public double getPrice() {
@@ -88,13 +115,5 @@ public class ProductDto {
 
     public void setModify_at(Date modify_at) {
         this.modify_at = modify_at;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }
