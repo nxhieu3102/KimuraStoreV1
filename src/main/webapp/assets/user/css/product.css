@@ -164,7 +164,7 @@ html{
 .field-list__item{
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: left;
 }
 
 .field-list__item > p{
@@ -186,3 +186,10 @@ html{
     border-radius: 3px;
 }
 
+.image-container{
+    border: 1px solid #ccc;
+    display: flex;
+    height: 450px;
+    height: 450px;
+    justify-content: center;
+}
