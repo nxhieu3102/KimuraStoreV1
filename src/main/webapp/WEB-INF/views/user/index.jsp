@@ -59,7 +59,7 @@
             <div class="row product-event__list">
                 <c:forEach var="item" items="${newProduct}">
                     <div class="col l-2-4 m-4 c-6 best-seller__item">
-                        <a href="./product.html" class="product-event__item">
+                        <a href="/chi-tiet-san-pham/${item.id}" class="product-event__item">
                             <div class="product-event__item-img"
                                  style="background-image: url(<c:url value = "/assets/user/img/product/${item.image}"/>)"></div>
                             <h4 class="product-event__item-name">
@@ -89,7 +89,7 @@
             <div class="row product-event__list">
                 <c:forEach var="item" items="${discountProduct}">
                     <div class="col l-2-4 m-4 c-6">
-                        <a href="./product.html" class="product-event__item">
+                        <a href="/chi-tiet-san-pham/${item.id}" class="product-event__item">
                             <div class="product-event__item-img"
                                  style="background-image: url(<c:url value = "/assets/user/img/product/item6.jpg"/>)"></div>
                             <h4 class="product-event__item-name">
