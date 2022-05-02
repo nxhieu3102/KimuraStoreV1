@@ -18,46 +18,21 @@
             <div class="row">
                 <div class="col l-5 m-12 c-12">
                     <div class="image-container">
-                        <img src="<c:url value ="/assets/user/img/product/${product.image}" />" height="100%" width="auto">
+                        <img src="<c:url value ="/assets/user/img/product/${product.image}" />" width="auto" height="100%" style="padding: 5px 0;">
                     </div>
 
-                    <div class="small-img-row">
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item1.jfif">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item2.jfif">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item3.jfif">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item4.jfif">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item5.jfif">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="./assests/img/product detail/item6.jfif">
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col l-7 m-12 c-12">
-                    <h1>SON CEZANNE LASTING GLOSS LIP nội địa Nhật Bản</h1>
-                    <p>Tình trạng: <span>Còn hàng</span></p>
+                    <h1>${product.name}</h1>
                     <h4>190.000đ - 230.000đ</h4>
                     <div class="field-list">
                         <div class="field-list__item">
-                            <p>Màu:</p>
+                            <p>Lựa chọn:</p>
                             <div class="field-item__options">
-                                <button>101- </button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
-                                <button>101-Đỏ cam nâu đất</button>
+                                <c:forEach var="item" items="${productOptions}">
+                                    <button> ${item.name}</button>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -109,51 +84,19 @@
                 <div class="hot-product-wrap">
                     <h1>Có thể bạn quan tâm</h1>
                     <ul class="hot-product-list">
-                        <li>
-                            <a href="" class="hot-product-item">
-                                <img src="./assests/img/product/item1.jpg" alt="">
-                                <div class="hot-product-item-body">
-                                    <h3>KEO DÁN MI GIẢ D-UP 552 CLEAR TYPE NỘI ĐỊA NHẬT</h3>
-                                    <p>325.000đ</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="hot-product-item">
-                                <img src="./assests/img/product/item1.jpg" alt="">
-                                <div class="hot-product-item-body">
-                                    <h3>KEO DÁN MI GIẢ D-UP 552 CLEAR TYPE NỘI ĐỊA NHẬT</h3>
-                                    <p>325.000đ</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="hot-product-item">
-                                <img src="./assests/img/product/item1.jpg" alt="">
-                                <div class="hot-product-item-body">
-                                    <h3>KEO DÁN MI GIẢ D-UP 552 CLEAR TYPE NỘI ĐỊA NHẬT</h3>
-                                    <p>325.000đ</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="hot-product-item">
-                                <img src="./assests/img/product/item1.jpg" alt="">
-                                <div class="hot-product-item-body">
-                                    <h3>KEO DÁN MI GIẢ D-UP 552 CLEAR TYPE NỘI ĐỊA NHẬT</h3>
-                                    <p>325.000đ</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="hot-product-item">
-                                <img src="./assests/img/product/item1.jpg" alt="">
-                                <div class="hot-product-item-body">
-                                    <h3>KEO DÁN MI GIẢ D-UP 552 CLEAR TYPE NỘI ĐỊA NHẬT</h3>
-                                    <p>325.000đ</p>
-                                </div>
-                            </a>
-                        </li>
+                        <c:forEach var="item" items="${productRelated}" varStatus="loop">
+                            <li>
+                                <a href="" class="hot-product-item">
+                                    <img src="<c:url value="/assets/user/img/product/${productRelated.get(loop.index).image}" />" alt="">
+                                    <div class="hot-product-item-body">
+                                        <h3>${productRelated.get(loop.index).name}</h3>
+                                        <p><fmt:formatNumber type="number"
+                                                             groupingUsed="true"
+                                                             value="${productRelated.get(loop.index).price}"/>đ</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
