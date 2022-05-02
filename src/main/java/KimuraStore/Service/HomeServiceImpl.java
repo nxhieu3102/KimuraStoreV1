@@ -1,8 +1,10 @@
 package KimuraStore.Service;
 
+import KimuraStore.Dao.CategoryDao;
 import KimuraStore.Dao.ProductDao;
 import KimuraStore.Dao.SlidesDao;
 import KimuraStore.Dto.ProductDto;
+import KimuraStore.Enity.Category;
 import KimuraStore.Enity.Slide;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class HomeServiceImpl implements IHomeService{
 
     @Autowired
     private ProductDao productDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @Override
     public List<Slide> GetDataSlide() {
@@ -40,5 +45,9 @@ public class HomeServiceImpl implements IHomeService{
             }
         }
         return list;
+    }
+
+    public List<Category> GetDataCategory(){
+        return categoryDao.GetDataCategory();
     }
 }

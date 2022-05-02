@@ -10,6 +10,9 @@ public class HomeController extends BaseController {
     @RequestMapping(value = {"/", "/trang-chu"})
     public ModelAndView Index() {
         _mvShare.addObject("slides", _homeService.GetDataSlide());
+        _mvShare.addObject("category", _homeService.GetDataCategory());
+        _mvShare.addObject("newProduct", _homeService.GetNewProduct());
+        _mvShare.addObject("discountProduct", _homeService.GetDiscountProduct());
         _mvShare.setViewName("user/index");
         return _mvShare;
     }
