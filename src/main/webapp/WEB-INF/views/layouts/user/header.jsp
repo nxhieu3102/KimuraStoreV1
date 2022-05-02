@@ -33,7 +33,7 @@
                     <a href="./singup.html" class="category__mobile-title">Đăng Kí</a>
                 </div>
                 <div class="category__mobile-header">
-                    <a href="./index.html" class="category__mobile-title">Trang chủ</a>
+                    <a href="/" class="category__mobile-title">Trang chủ</a>
                 </div>
                 <div class="category__mobile-header">
                     <a href="./allProduct.html" class="category__mobile-title">Tất cả sản phẩm</a>
@@ -93,7 +93,7 @@
 
         <div class="header__logo">
             <div class="header__logo-icon">
-                <a href="./index.html">
+                <a href="/">
                     <img src="<c:url value = "/assets/user/img/LOGO.png" />" alt="" class="header__logo-img" />
                 </a>
             </div>
