@@ -40,46 +40,12 @@
                 <li class = "category__header">
                     <a href="./allProduct.html" class="category__header-link">Danh mục sản phẩm</a>
                 </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Trang điểm</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Nước cân bằng da</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Giảm cân và chăm sóc sức khỏe</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Mặt nạ</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Tắm & chăm sóc cơ thể</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Dụng cụ làm đẹp</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Tinh chất dưỡng</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Kem dưỡng ẩm</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Sản phẩm dưỡng mắt</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Sửa rửa mặt</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Nhà cửa và đời sống: đồ dùng cá nhân & gia đình
-                    </a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Kem chống nắng</a>
-                </li>
-                <li class="category-bar__item">
-                    <a href="./allProduct.html" class="category-bar__item-link">Đồ ăn</a>
-                </li>
+                <c:forEach var="item" items="${category}">
+                    <li class="category-bar__item">
+                        <a href="./allProduct.html" class="category-bar__item-link">${item.name}</a>
+                    </li>
+                </c:forEach>
+
             </ul>
             <div class="intro-image">
                 <c:forEach var = "item" items="${slides}">
