@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MapperSlide implements RowMapper<Slide> {
+public class    MapperSlide implements RowMapper<Slide> {
     @Override
     public Slide mapRow(ResultSet resultSet, int i) throws SQLException {
         Slide slide = new Slide();
