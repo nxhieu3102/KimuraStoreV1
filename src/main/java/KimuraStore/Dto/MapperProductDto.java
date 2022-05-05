@@ -13,11 +13,11 @@ public class MapperProductDto implements RowMapper<ProductDto> {
         productDto.setId(resultSet.getInt("id"));
         productDto.setCategory_id(resultSet.getInt("category_id"));
         productDto.setName(resultSet.getString("name"));
-        productDto.setDeltail(resultSet.getString("deltail"));
-        productDto.setDiscount(resultSet.getBoolean("discount"));
+        productDto.setdetail(resultSet.getString("detail"));
+        productDto.setDiscount_id(resultSet.getInt("discount_id"));
         productDto.setDiscount_rate(resultSet.getDouble("discount_rate"));
         productDto.setDiscount_money(resultSet.getDouble("discount_money"));
-        productDto.setNew_product(resultSet.getBoolean("new_product"));
+        productDto.setQuantity_sell(resultSet.getInt("quantity_sell"));
         productDto.setPrice(resultSet.getDouble("price"));
         productDto.setCreate_at(resultSet.getDate("create_at"));
         productDto.setModify_at(resultSet.getDate("modify_at"));

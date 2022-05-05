@@ -6,29 +6,36 @@ public class ProductDto {
     private int id;
     private int category_id;
     private String name;
-    private String deltail;
-    private boolean discount;
+
+    public double getDiscount_rate() {
+        return discount_rate;
+    }
+
+    public void setDiscount_rate(double discount_rate) {
+        this.discount_rate = discount_rate;
+    }
+
+    public double getDiscount_money() {
+        return discount_money;
+    }
+
+    public void setDiscount_money(double discount_money) {
+        this.discount_money = discount_money;
+    }
+
+    private String detail;
+    private int discount_id;
     private double discount_rate;
     private double discount_money;
-    private boolean new_product;
+    private int quantity_sell;
     private double price;
     private Date create_at;
     private Date modify_at;
-
     private String image;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public ProductDto() {
         super();
     }
-
     public int getId() {
         return id;
     }
@@ -53,44 +60,28 @@ public class ProductDto {
         this.name = name;
     }
 
-    public String getDeltail() {
-        return deltail;
+    public String getdetail() {
+        return detail;
     }
 
-    public void setDeltail(String deltail) {
-        this.deltail = deltail;
+    public void setdetail(String detail) {
+        this.detail = detail;
     }
 
-    public boolean isDiscount() {
-        return discount;
+    public int getDiscount_id() {
+        return discount_id;
     }
 
-    public void setDiscount(boolean discount) {
-        this.discount = discount;
+    public void setDiscount_id(int discount_id) {
+        this.discount_id = discount_id;
     }
 
-    public double getDiscount_rate() {
-        return discount_rate;
+    public int getQuantity_sell() {
+        return quantity_sell;
     }
 
-    public void setDiscount_rate(double discount_rate) {
-        this.discount_rate = discount_rate;
-    }
-
-    public double getDiscount_money() {
-        return discount_money;
-    }
-
-    public void setDiscount_money(double discount_money) {
-        this.discount_money = discount_money;
-    }
-
-    public boolean isNew_product() {
-        return new_product;
-    }
-
-    public void setNew_product(boolean new_product) {
-        this.new_product = new_product;
+    public void setQuantity_sell(int quantity_sell) {
+        this.quantity_sell = quantity_sell;
     }
 
     public double getPrice() {
@@ -115,5 +106,13 @@ public class ProductDto {
 
     public void setModify_at(Date modify_at) {
         this.modify_at = modify_at;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

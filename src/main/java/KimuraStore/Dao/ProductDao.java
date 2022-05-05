@@ -18,11 +18,11 @@ public class ProductDao extends BaseDao{
         sql.append("id, ");
         sql.append("category_id, ");
         sql.append("name, ");
-        sql.append("deltail, ");
-        sql.append("discount, ");
+        sql.append("detail, ");
+        sql.append("discount_id, ");
         sql.append("discount_rate, ");
         sql.append("discount_money, ");
-        sql.append("new_product, ");
+        sql.append("quantity_sell, ");
         sql.append("price, ");
         sql.append("create_at, ");
         sql.append("modify_at, ");
@@ -31,30 +31,12 @@ public class ProductDao extends BaseDao{
         return sql;
     }
 
-    private String SqlNewProduct() {
-        StringBuffer sql =  SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND new_product = 1 ");
-        sql.append("ORDER BY RAND() ");
-        sql.append("LIMIT 6 ");
-        return sql.toString();
-    }
-
     private String SqlRelatedProductsByIDCategory(int id) {
         StringBuffer sql =  SqlString();
         sql.append("WHERE 1 = 1 ");
-        sql.append("AND category_id = " + id + " ");
+        sql.append("AND category_id  = " + id + " ");
         sql.append("ORDER BY RAND() ");
         sql.append("LIMIT 5 ");
-        return sql.toString();
-    }
-
-    private String SqlDiscountProduct() {
-        StringBuffer sql =  SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND discount = 1 ");
-        sql.append("ORDER BY RAND() ");
-        sql.append("LIMIT 6 ");
         return sql.toString();
     }
 
@@ -71,18 +53,12 @@ public class ProductDao extends BaseDao{
         sql.append("AND category_id = " + id + " ");
         return sql.toString();
     }
-    public List<ProductDto> GetNewProduct() {
-        List<ProductDto> list = new ArrayList<ProductDto>();
-        String sql = SqlNewProduct();
-        list = _jdbcTemplate.query(sql, new MapperProductDto());
-        return list;
-    }
 
-    public List<ProductDto> GetDiscountProduct() {
-        List<ProductDto> list = new ArrayList<ProductDto>();
-        String sql = SqlDiscountProduct();
-        list = _jdbcTemplate.query(sql, new MapperProductDto());
-        return list;
+    private String SqlDiscountProduct() {
+        StringBuffer sql = SqlString();
+        sql.append("WHERE 1 = 1 ");
+        sql.append("AND discount_id > 0 ");
+        return sql.toString();
     }
 
     public List<ProductDto> GetDataProduct() {
@@ -109,6 +85,13 @@ public class ProductDao extends BaseDao{
     public List<ProductDto> GetRelatedProductByIdCategory(int id) {
         List<ProductDto> list = new ArrayList<ProductDto>();
         String sql = SqlRelatedProductsByIDCategory(id);
+        list = _jdbcTemplate.query(sql, new MapperProductDto());
+        return list;
+    }
+
+    public List<ProductDto> GetDiscountProduct() {
+        List<ProductDto> list = new ArrayList<ProductDto>();
+        String sql = SqlDiscountProduct();
         list = _jdbcTemplate.query(sql, new MapperProductDto());
         return list;
     }
