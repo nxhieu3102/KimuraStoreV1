@@ -57,7 +57,7 @@
         <div class="best-seller">
             <h1 class="product-event__title">Bán Chạy</h1>
             <div class="row product-event__list">
-                <c:forEach var="item" items="${newProduct}">
+                <c:forEach var="item" items="${bestSellerProduct}">
                     <div class="col l-2-4 m-4 c-6 best-seller__item">
                         <a href="/chi-tiet-san-pham/${item.id}" class="product-event__item">
                             <div class="product-event__item-img"
