@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8"/>
@@ -20,6 +19,7 @@
     <link rel="stylesheet" href="<c:url value="/assets/user/css/base.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/main.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/product.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/allProduct.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/responsive.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/font/1.3.0/css/line-awesome.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/font/1.3.0/css/line-awesome.min.css" />"/>
