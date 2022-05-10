@@ -186,3 +186,8 @@ html{
     border-radius: 3px;
 }
 
+.image-container{
+    display: flex;
+    height: 450px;
+    height: 450px;
+}
