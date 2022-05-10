@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
            prefix="decorator" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <body>
 <div class="product-container">
@@ -18,22 +18,82 @@
             <div class="row">
                 <div class="col l-5 m-12 c-12">
                     <div class="image-container">
-                        <img src="<c:url value ="/assets/user/img/product/${product.image}" />" width="auto" height="100%" style="padding: 5px 0;">
+                        <img src="<c:url value ="/assets/user/img/product/${product.image}" />" width="auto"
+                             height="100%" style="padding: 5px 0;">
                     </div>
 
 
                 </div>
                 <div class="col l-7 m-12 c-12">
                     <h1>${product.name}</h1>
-                    <h4>190.000đ - 230.000đ</h4>
+                    <h4>
+                        <c:choose>
+                            <c:when test="${product.price_min != product.price_max and optionId == -1   }">
+                                <c:if test="${product.discount_money != 0}">
+                                    <span class="product-event__item-price--old">
+                                        <fmt:formatNumber type="number"
+                                                          groupingUsed="true"
+                                                          value="${product.price_min - product.discount_money}"/>đ -
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${product.price_max - product.discount_money}"/>đ
+                                    </span>
+                                </c:if>
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${product.price_min}"/>đ -
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${product.price_max}"/>
+                            </c:when>
+                            <c:when test="${optionId == -1}">
+                                <c:if test="${product.discount_money != 0}">
+                                    <span class="product-event__item-price--old">
+                                        <fmt:formatNumber type="number"
+                                                          groupingUsed="true"
+                                                          value="${product.price}"/>đ
+                                    </span>
+                                </c:if>
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${product.price  - product.discount_money}"/>đ
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${product.discount_money != 0}">
+                                    <span class="product-event__item-price--old">
+                                        <fmt:formatNumber type="number"
+                                                          groupingUsed="true"
+                                                          value="${productByIdOptions.price}"/>đ
+                                    </span>
+                                </c:if>
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${productByIdOptions.price  - productByIdOptions.discount_money}"/>đ
+                            </c:otherwise>
+                        </c:choose>
+                    </h4>
+
                     <div class="field-list">
                         <div class="field-list__item">
-                            <p>Lựa chọn:</p>
-                            <div class="field-item__options">
-                                <c:forEach var="item" items="${productOptions}">
-                                    <button> ${item.name}</button>
-                                </c:forEach>
-                            </div>
+                            <c:if test="${productOptions.size() > 0}">
+                                <p>Lựa chọn:</p>
+                                <div class="field-item__options">
+                                    <c:forEach var="item" items="${productOptions}">
+                                        <c:if test="${item.id == optionId}">
+                                            <a class="field-item__options-a field-item__options-active"
+                                               href="/chi-tiet-san-pham/${idProduct}/${item.id}">
+                                                    ${item.name}
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${item.id != optionId}">
+                                            <a class="field-item__options-a"
+                                               href="/chi-tiet-san-pham/${idProduct}/${item.id}">
+                                                    ${item.name}
+                                            </a>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                     <p>Số lượng: </p>
@@ -54,29 +114,7 @@
                 <div class="product-description">
                     <h1>Mô tả sản phẩm</h1>
                     <p>
-                        🇯🇵Keo dán mi giả D-UP 552 Clear Type🇯🇵<br>
-                        .<br>
-                        🥇Keo dán mi giả D.UP chất lượng vượt trội, vươn lên hẳn vị trí số 1 tạp chí Cosme luôn nhé,
-                        được rất nhiều Makeup Artist chuyên nghiệp nổi tiếng thế giới tin dùng ✌<br>
-                        .<br>
-                        ✔️Chất keo được làm bằng chất kết dính y tế an toàn với da mắt, cho cảm giác nhẹ nhàng trên
-                        mi mắt 🌼<br>
-                        .<br>
-                        ✔️Cường độ bám dính của keo siêu chặt, giữ vững trên mi mắt. Hãng đảm bảo dùng tay kéo cũng
-                        không ra được đâu ạ. .<br>
-                        ✔️ Màu keo trong suốt, cho hiệu ứng tự nhiên.<br>
-                        .<br>
-                        ✔️ Có khả năng chống nước, chống mồ hôi, chống bã nhờn, dễ dàng dính mí trong lần dán đầu
-                        tiên.<br>
-                        .<br>
-                        📌Chai 5ml.<br>
-                        . ➖➖➖➖➖<br>
-                        .<br>
-                        📞Call/viber/zalo: 0914 837 823.<br>
-                        .<br>
-                        💯Cam kết hàng chính hãng 100%, luôn luôn có bills mua tại các store uy tín ở Tokyo 🇯🇵<br>
-                        .<br>
-                        ➖➖➖➖➖<br>
+                        ${product.detail}
                     </p>
                 </div>
             </div>
@@ -86,13 +124,30 @@
                     <ul class="hot-product-list">
                         <c:forEach var="item" items="${productRelated}" varStatus="loop">
                             <li>
-                                <a href="" class="hot-product-item">
-                                    <img src="<c:url value="/assets/user/img/product/${productRelated.get(loop.index).image}" />" alt="">
+                                <a href="/chi-tiet-san-pham/${productRelated.get(loop.index).id }"
+                                   class="hot-product-item">
+                                    <img src="<c:url value="/assets/user/img/product/${productRelated.get(loop.index).image}" />"
+                                         alt="">
                                     <div class="hot-product-item-body">
                                         <h3>${productRelated.get(loop.index).name}</h3>
-                                        <p><fmt:formatNumber type="number"
-                                                             groupingUsed="true"
-                                                             value="${productRelated.get(loop.index).price}"/>đ</p>
+
+                                        <p>
+                                            <c:choose>
+                                                <c:when test="${item.price_min != item.price_max}">
+                                                    <fmt:formatNumber type="number"
+                                                                      groupingUsed="true"
+                                                                      value="${item.price_min}"/>đ -
+                                                    <fmt:formatNumber type="number"
+                                                                      groupingUsed="true"
+                                                                      value="${item.price_max}"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <fmt:formatNumber type="number"
+                                                                      groupingUsed="true"
+                                                                      value="${item.price}"/>đ
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
                                     </div>
                                 </a>
                             </li>
@@ -103,5 +158,5 @@
         </div>
     </div>
 </div>
-
 </body>
+
