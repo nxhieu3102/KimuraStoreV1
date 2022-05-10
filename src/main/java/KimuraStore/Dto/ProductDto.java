@@ -29,6 +29,33 @@ public class ProductDto {
     private double discount_money;
     private int quantity_sell;
     private double price;
+    private double price_min;
+    private double price_max;
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public double getPrice_min() {
+        return price_min;
+    }
+
+    public void setPrice_min(double price_min) {
+        this.price_min = price_min;
+    }
+
+    public double getPrice_max() {
+        return price_max;
+    }
+
+    public void setPrice_max(double price_max) {
+        this.price_max = price_max;
+    }
+
     private Date create_at;
     private Date modify_at;
     private String image;
@@ -36,6 +63,7 @@ public class ProductDto {
     public ProductDto() {
         super();
     }
+
     public int getId() {
         return id;
     }

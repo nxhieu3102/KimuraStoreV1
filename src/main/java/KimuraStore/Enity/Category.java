@@ -5,7 +5,8 @@ public class Category {
     private String name;
     private String details;
 
-    public Category() {}
+    public Category() {
+    }
 
     public int getId() {
         return id;

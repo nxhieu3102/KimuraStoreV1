@@ -8,6 +8,7 @@ public class Discount {
     public Discount() {
         super();
     }
+
     public int getId() {
         return id;
     }

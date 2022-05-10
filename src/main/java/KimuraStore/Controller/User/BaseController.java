@@ -1,11 +1,9 @@
 package KimuraStore.Controller.User;
 
-import KimuraStore.Service.HomeServiceImpl;
+import KimuraStore.Service.Impl.HomeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.PostConstruct;
 
 @Controller
 public class BaseController {

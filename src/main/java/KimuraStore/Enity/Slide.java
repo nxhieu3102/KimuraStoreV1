@@ -1,8 +1,8 @@
 package KimuraStore.Enity;
 
 public class Slide {
-     private int id;
-     private String image;
+    private int id;
+    private String image;
 
     public Slide() {
         super();
