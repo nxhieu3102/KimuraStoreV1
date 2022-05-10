@@ -1,21 +1,22 @@
-package KimuraStore.Service;
+package KimuraStore.Service.Impl;
 
 import KimuraStore.Dao.ProductDao;
 import KimuraStore.Dao.ProductOptionsDao;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Dto.ProductOptionsDto;
+import KimuraStore.Enity.ProductOptions;
+import KimuraStore.Service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements IProductService{
+public class ProductServiceImpl implements IProductService {
 
     @Autowired
-    ProductDao productDao;
+    private ProductDao productDao;
     @Autowired
-    ProductOptionsDao productOptionsDao;
+    private ProductOptionsDao productOptionsDao;
 
     @Override
     public List<ProductDto> GetAllProductByIdCategory(int id) {
@@ -28,12 +29,18 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public List<ProductOptionsDto> GetProductOptionsById(int id) {
-        return productOptionsDao.GetProductOptionsById(id);
+    public List<ProductOptions> GetProductOptionsByIdProduct(int id) {
+        return productOptionsDao.GetProductOptionsByIdProduct(id);
     }
 
     @Override
     public List<ProductDto> GetRelatedProductByIdCategory(int id) {
         return productDao.GetRelatedProductByIdCategory(id);
     }
+
+    @Override
+    public ProductOptions GetProductOptionsByIdOption(int id) {
+        return productOptionsDao.GetProductOptionsByIdOption(id);
+    }
+
 }
