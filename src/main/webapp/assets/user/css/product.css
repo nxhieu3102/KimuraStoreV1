@@ -172,10 +172,11 @@ html{
 }
 
 .field-item__options{
+    display: flex;
     margin-left: 20px;
 }
 
-.field-item__options > button{
+.field-item__options-a{
     background-color: var(--white-color);
     border: 1px solid rgb(199, 194, 194);
     font-size: 1.4rem;
@@ -184,6 +185,13 @@ html{
     cursor: pointer;
     color: var(--text-color);
     border-radius: 3px;
+    display: block;
+    text-decoration: none;
+}
+
+.field-item__options-active {
+    background-color: var(--red-color);
+    color: var(--white-color);
 }
 
 .image-container{
