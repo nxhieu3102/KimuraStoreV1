@@ -1,5 +1,6 @@
-package KimuraStore.Enity;
+package KimuraStore.Entity.Mapper;
 
+import KimuraStore.Entity.Slide;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

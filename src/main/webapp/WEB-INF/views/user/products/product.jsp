@@ -102,8 +102,7 @@
                         <input type="number" min="0" value="1" class="quantity-number">
                         <button class="change-quantity quantity-btn--increase">+</button>
                     </div>
-
-                    <button class="btn product-btn">Thêm vào giỏ hàng</button>
+                    <button class="btn product-btn add-to-cart-btn" type="submit" data-id="${product.id}">Thêm vào giỏ hàng</button>
                 </div>
             </div>
         </div>
@@ -159,4 +158,5 @@
     </div>
 </div>
 </body>
+
 

@@ -1,14 +1,12 @@
-package KimuraStore.Enity;
-
+package KimuraStore.Entity;
 public class Discount {
     private int id;
     private double discount_rate;
     private double discount_money;
 
     public Discount() {
-        super();
-    }
 
+    }
     public int getId() {
         return id;
     }

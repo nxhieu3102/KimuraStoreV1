@@ -74,19 +74,22 @@
                                                           value="${item.price_min}"/>đ -
                                         <fmt:formatNumber type="number"
                                                           groupingUsed="true"
-                                                          value="${item.price_max}"/>
+                                                          value="${item.price_max}"/>đ
                                     </c:when>
                                     <c:otherwise>
                                         <fmt:formatNumber type="number"
                                                           groupingUsed="true"
-                                                          value="${item.price}"/>
+                                                          value="${item.price}"/>đ
                                     </c:otherwise>
                                 </c:choose>
                             </div>
                             <div class="product-event__item-add">
-                                <button class="product-event__item-btn btn">
-                                    Thêm vào giỏ hàng
-                                </button>
+                                <form method="get" action="<c:url value="/AddCart/${item.id}" />" >
+                                    <button class="product-event__item-btn btn" type="submit">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </form>
+
                             </div>
                             <div class="best-seller__label">
                                 <i class="fas fa-check"></i>
@@ -119,9 +122,11 @@
                                                                                                value="${item.price - item.discount_money}"/>đ</span>
                             </div>
                             <div class="product-event__item-add">
-                                <button class="product-event__item-btn btn">
-                                    Thêm vào giỏ hàng
-                                </button>
+                                <form method="get" action="<c:url value="/AddCart/${item.id}" />" >
+                                    <button class="product-event__item-btn btn" type="submit">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </form>
                             </div>
                             <div class="discount__label">
                                 <span class="discount__label-percent">${item.discount_rate}%</span>

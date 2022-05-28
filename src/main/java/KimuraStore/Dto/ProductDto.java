@@ -1,28 +1,12 @@
 package KimuraStore.Dto;
-
 import java.util.Date;
 
+
 public class ProductDto {
+
     private int id;
     private int category_id;
     private String name;
-
-    public double getDiscount_rate() {
-        return discount_rate;
-    }
-
-    public void setDiscount_rate(double discount_rate) {
-        this.discount_rate = discount_rate;
-    }
-
-    public double getDiscount_money() {
-        return discount_money;
-    }
-
-    public void setDiscount_money(double discount_money) {
-        this.discount_money = discount_money;
-    }
-
     private String detail;
     private int discount_id;
     private double discount_rate;
@@ -31,38 +15,9 @@ public class ProductDto {
     private double price;
     private double price_min;
     private double price_max;
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public double getPrice_min() {
-        return price_min;
-    }
-
-    public void setPrice_min(double price_min) {
-        this.price_min = price_min;
-    }
-
-    public double getPrice_max() {
-        return price_max;
-    }
-
-    public void setPrice_max(double price_max) {
-        this.price_max = price_max;
-    }
-
     private Date create_at;
     private Date modify_at;
     private String image;
-
-    public ProductDto() {
-        super();
-    }
 
     public int getId() {
         return id;
@@ -88,11 +43,11 @@ public class ProductDto {
         this.name = name;
     }
 
-    public String getdetail() {
+    public String getDetail() {
         return detail;
     }
 
-    public void setdetail(String detail) {
+    public void setDetail(String detail) {
         this.detail = detail;
     }
 
@@ -102,6 +57,22 @@ public class ProductDto {
 
     public void setDiscount_id(int discount_id) {
         this.discount_id = discount_id;
+    }
+
+    public double getDiscount_rate() {
+        return discount_rate;
+    }
+
+    public void setDiscount_rate(double discount_rate) {
+        this.discount_rate = discount_rate;
+    }
+
+    public double getDiscount_money() {
+        return discount_money;
+    }
+
+    public void setDiscount_money(double discount_money) {
+        this.discount_money = discount_money;
     }
 
     public int getQuantity_sell() {
@@ -118,6 +89,22 @@ public class ProductDto {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getPrice_min() {
+        return price_min;
+    }
+
+    public void setPrice_min(double price_min) {
+        this.price_min = price_min;
+    }
+
+    public double getPrice_max() {
+        return price_max;
+    }
+
+    public void setPrice_max(double price_max) {
+        this.price_max = price_max;
     }
 
     public Date getCreate_at() {

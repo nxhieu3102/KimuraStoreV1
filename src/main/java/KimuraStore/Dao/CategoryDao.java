@@ -1,7 +1,7 @@
 package KimuraStore.Dao;
 
-import KimuraStore.Enity.Category;
-import KimuraStore.Enity.MapperCategory;
+import KimuraStore.Entity.Category;
+import KimuraStore.Entity.Mapper.MapperCategory;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

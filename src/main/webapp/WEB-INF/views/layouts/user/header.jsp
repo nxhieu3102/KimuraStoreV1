@@ -7,6 +7,11 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
+           prefix="decorator" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <header id="header">
     <div class="grid wide header-wrap">
         <div class="header__mobile-icon">
@@ -18,8 +23,8 @@
             </label>
         </div>
 
-        <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox" />
-        <input type="checkbox" hidden name="" class="category__input" id="category__mobile-input" />
+        <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox"/>
+        <input type="checkbox" hidden name="" class="category__input" id="category__mobile-input"/>
 
         <div class="category__mobile">
             <div class="category__mobile-wrap">
@@ -30,7 +35,7 @@
                     </label>
                 </div>
                 <div class="category__mobile-header">
-                    <a href="./singup.html" class="category__mobile-title">Đăng Kí</a>
+                    <a href="/dang-ky" class="category__mobile-title">Đăng Kí</a>
                 </div>
                 <div class="category__mobile-header">
                     <a href="/" class="category__mobile-title">Trang chủ</a>
@@ -94,14 +99,14 @@
         <div class="header__logo">
             <div class="header__logo-icon">
                 <a href="/">
-                    <img src="<c:url value = "/assets/user/img/LOGO.png" />" alt="" class="header__logo-img" />
+                    <img src="<c:url value = "/assets/user/img/LOGO.png" />" alt="" class="header__logo-img"/>
                 </a>
             </div>
         </div>
 
         <div class="header__search">
             <div class="header__search-input">
-                <input type="text" class="header__search-input-box" placeholder="Tìm kiếm sản phẩm" />
+                <input type="text" class="header__search-input-box" placeholder="Tìm kiếm sản phẩm"/>
             </div>
             <div class="header__search-button">
                 <button class="header__search-button-item">
@@ -111,13 +116,25 @@
         </div>
 
         <div class="header__icon">
-            <div class="header__icon-item hide-on-mobile hide-on-tablet">
+            <c:if test="${empty loginInfo}">
+                <div class="header__icon-item hide-on-mobile hide-on-tablet">
+                    <i class="far fa-user"></i>
+                    <div class="header__icon-text">
+                        <a href="/dang-ky" class="header__icon-text-item">Đăng Kí</a>
+                        <a href="/dang-nhap" class="header__icon-text-item">Đăng Nhập</a>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${loginInfo != null}">
+            <div class="header__icon-item hide-on-mobile hide-on-tablet header__user">
                 <i class="far fa-user"></i>
-                <div class="header__icon-text">
-                    <a href="./singup.html" class="header__icon-text-item">Đăng Kí</a>
-                    <a href="./signin.html" class="header__icon-text-item">Đăng Nhập</a>
+                <a style="text-decoration: none; font-size: 14px; margin-left: 5px">${loginInfo.getDisplay_name()}</a>
+                <div class="header__user-info">
+                    <a href="" class="header__user-info-text">Thông tin cá nhân</a>
+                    <a href="/dang-xuat" class="header__user-info-text">Đăng xuất</a>
                 </div>
             </div>
+            </c:if>
             <div class="header__icon-item hide-on-mobile hide-on-tablet">
                 <i class="fas fa-headphones-alt"></i>
                 <div class="header__icon-text">
@@ -129,84 +146,53 @@
             </div>
             <div class="header__icon-item header__cart">
                 <i class="las la-shopping-cart"></i>
-                <span class="header__icon-cart-quantity">3</span>
+                <span class="header__icon-cart-quantity">
+                    <c:if test="${Cart == null}">0</c:if>
+                    <c:if test="${Cart != null}">${Cart.size()}</c:if>
+
+                </span>
                 <div class="header__cart-list">
-                    <div class="header__cart-list--empty">
-                        <img src="<c:url value = "/assets/user/img/no__cart.jpg" />" alt="" class="header__cart-no-cart-img" />
-                        <span class="header__cart-list-no-cart-msg">
+                    <c:if test="${Cart == null || Cart.size() == 0}">
+                        <div class="header__cart-list--empty" style="display: flex">
+                            <img src="<c:url value = "/assets/user/img/no__cart.jpg" />" alt=""
+                                 class="header__cart-no-cart-img"/>
+                            <span class="header__cart-list-no-cart-msg">
                                 Chưa có sản phẩm
                             </span>
-                    </div>
-                    <div class="header__cart-list--not-empty">
-                        <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                        <ul class="header__cart-list-item">
-                            <!-- cart item -->
-                            <li class="header__cart-item">
-                                <img src="<c:url value = "/assets/user/img/item.jpg" />" alt="" class="header__cart-img" />
-                                <div class="header__cart-item-info">
-                                    <div class="header__cart-item-head">
-                                        <h5 class="header__cart-item-name">
-                                            Bộ kem đặc trị vùng mắt
-                                        </h5>
-                                        <div class="header__cart-item-price-wrap">
-                                            <span class="header__cart-item-price">2.000.000đ</span>
-                                            <span class="header__cart-item-multiply">x</span>
-                                            <span class="header__cart-item-qnt">2</span>
+                        </div>
+                    </c:if>
+                    <c:if test="${Cart != null && Cart.size() > 0}">
+                        <div class="header__cart-list--not-empty" style="display: block">
+                            <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                            <ul class="header__cart-list-item">
+                                <!-- cart item -->
+                                <c:forEach var="item" items="${Cart}">
+                                    <li class="header__cart-item">
+                                        <img src="<c:url value = "/assets/user/img/product/${item.value.product.getImage()}" />" alt=""
+                                             class="header__cart-img"/>
+                                        <div class="header__cart-item-info">
+                                            <div class="header__cart-item-head">
+                                                <h5 class="header__cart-item-name">
+                                                        ${item.value.product.getName()}
+                                                </h5>
+                                                <div class="header__cart-item-price-wrap">
+                                                        <span class="header__cart-item-price"><fmt:formatNumber type="number"
+                                                                                                                groupingUsed="true"
+                                                                                                                value="${item.value.totalPrice}"/>đ</span>
+                                                    <span class="header__cart-item-multiply">x</span>
+                                                    <span class="header__cart-item-qnt">${item.value.quantity}</span>
+                                                </div>
+                                            </div>
+                                            <div class="header__cart-item-body">
+                                                <a href="<c:url value = "/DeleteCart/${item.value.product.getId()}" />" class="header__cart-item-remove">Xóa</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Bạc
-                                            </span>
-                                        <span class="header__cart-item-remove">Xóa</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="header__cart-item">
-                                <img src="<c:url value = "/assets/user/img/item.jpg" />"alt="" class="header__cart-img" />
-                                <div class="header__cart-item-info">
-                                    <div class="header__cart-item-head">
-                                        <h5 class="header__cart-item-name">
-                                            Bộ kem đặc trị vùng mắt
-                                        </h5>
-                                        <div class="header__cart-item-price-wrap">
-                                            <span class="header__cart-item-price">2.000.000đ</span>
-                                            <span class="header__cart-item-multiply">x</span>
-                                            <span class="header__cart-item-qnt">2</span>
-                                        </div>
-                                    </div>
-                                    <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Bạc
-                                            </span>
-                                        <span class="header__cart-item-remove">Xóa</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="header__cart-item">
-                                <img src="<c:url value = "/assets/user/img/item.jpg" />" alt="" class="header__cart-img" />
-                                <div class="header__cart-item-info">
-                                    <div class="header__cart-item-head">
-                                        <h5 class="header__cart-item-name">
-                                            Bộ kem đặc trị vùng mắt
-                                        </h5>
-                                        <div class="header__cart-item-price-wrap">
-                                            <span class="header__cart-item-price">2.000.000đ</span>
-                                            <span class="header__cart-item-multiply">x</span>
-                                            <span class="header__cart-item-qnt">2</span>
-                                        </div>
-                                    </div>
-                                    <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Bạc
-                                            </span>
-                                        <span class="header__cart-item-remove">Xóa</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="./cart.html" class="header__cart-view-cart btn"> Xem Giỏ Hàng </a>
-                    </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                            <a href="<c:url value = "/xem-gio-hang" />" class="header__cart-view-cart btn"> Xem Giỏ Hàng </a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -219,17 +205,19 @@
     </div>
     <div class="contact__list">
         <a target="_blank" href="https://zalo.me/0914837823" class="contact__list-item">
-            <img src="<c:url value = "/assets/user/img/contact/zalo.png" />" alt="" class="contact__item-img" title="zalo" />
+            <img src="<c:url value = "/assets/user/img/contact/zalo.png" />" alt="" class="contact__item-img"
+                 title="zalo"/>
         </a>
         <a target="_blank" href="https://www.facebook.com/Kimura.saigon.tokyo/" class="contact__list-item">
-            <img src="<c:url value = "/assets/user/img/contact/faacebook.png" />" alt="" class="contact__item-img" title="facebook" />
+            <img src="<c:url value = "/assets/user/img/contact/faacebook.png" />" alt="" class="contact__item-img"
+                 title="facebook"/>
         </a>
         <a target="_blank" href="https://shopee.vn/kimura1404" class="contact__list-item" title="shopee">
-            <img src="<c:url value = "/assets/user/img/contact/shopee.png" />" alt="" class="contact__item-img" />
+            <img src="<c:url value = "/assets/user/img/contact/shopee.png" />" alt="" class="contact__item-img"/>
         </a>
         <a target="_blank" href="https://www.instagram.com/kimura.store/" class="contact__list-item"
            title="instagram">
-            <img src="<c:url value = "/assets/user/img/contact/instagram.png" />" alt="" class="contact__item-img" />
+            <img src="<c:url value = "/assets/user/img/contact/instagram.png" />" alt="" class="contact__item-img"/>
         </a>
     </div>
 </div>

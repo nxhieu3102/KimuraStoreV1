@@ -2,8 +2,8 @@ package KimuraStore.Dao;
 
 import KimuraStore.Dto.MapperProductDto;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Discount;
-import KimuraStore.Enity.ProductOptions;
+import KimuraStore.Entity.Discount;
+import KimuraStore.Entity.ProductOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

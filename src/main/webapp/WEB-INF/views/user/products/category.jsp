@@ -66,9 +66,11 @@
                                                                                      groupingUsed="true"
                                                                                      value="${item.price}"/>đ</div>
                             <div class="product-event__item-add">
-                                <button class="product-event__item-btn btn">
-                                    Thêm vào giỏ hàng
-                                </button>
+                                <form method="get" action="<c:url value="/AddCart/${item.id}" />" >
+                                    <button class="product-event__item-btn btn" type="submit">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </form>
                             </div>
                         </a>
                     </div>

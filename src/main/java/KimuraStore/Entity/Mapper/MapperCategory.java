@@ -1,5 +1,6 @@
-package KimuraStore.Enity;
+package KimuraStore.Entity.Mapper;
 
+import KimuraStore.Entity.Category;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ public class MapperCategory implements RowMapper<Category> {
     public Category mapRow(ResultSet resultSet, int i) throws SQLException {
         Category category = new Category();
         category.setId(resultSet.getInt("id"));
-        category.setDetails(resultSet.getString("detail"));
+        category.setDetails(resultSet.getString("details"));
         category.setName(resultSet.getString("name"));
         return category;
     }

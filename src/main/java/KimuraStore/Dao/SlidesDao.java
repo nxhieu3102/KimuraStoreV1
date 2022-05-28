@@ -1,6 +1,6 @@
 package KimuraStore.Dao;
-import KimuraStore.Enity.MapperSlide;
-import KimuraStore.Enity.Slide;
+import KimuraStore.Entity.Mapper.MapperSlide;
+import KimuraStore.Entity.Slide;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

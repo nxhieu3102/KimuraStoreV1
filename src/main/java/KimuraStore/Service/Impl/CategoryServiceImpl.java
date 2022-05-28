@@ -3,7 +3,7 @@ package KimuraStore.Service.Impl;
 import KimuraStore.Dao.CategoryDao;
 import KimuraStore.Dao.ProductDao;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Category;
+import KimuraStore.Entity.Category;
 import KimuraStore.Service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

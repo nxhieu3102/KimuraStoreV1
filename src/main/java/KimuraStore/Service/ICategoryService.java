@@ -1,7 +1,7 @@
 package KimuraStore.Service;
 
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Category;
+import KimuraStore.Entity.Category;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

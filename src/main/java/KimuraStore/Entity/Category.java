@@ -1,4 +1,5 @@
-package KimuraStore.Enity;
+package KimuraStore.Entity;
+
 
 public class Category {
     private int id;
@@ -6,8 +7,8 @@ public class Category {
     private String details;
 
     public Category() {
-    }
 
+    }
     public int getId() {
         return id;
     }

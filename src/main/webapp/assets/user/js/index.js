@@ -141,7 +141,7 @@ const app = {
                 let num = Number($('.quantity-number').val());
                 console.log(num)
                 $('.quantity-number').val(String(num + 1));
-            }, 700);
+            }, 100);
         })
 
         $('.quantity-btn--decrease').click(function () {
@@ -150,7 +150,7 @@ const app = {
                 console.log(num);
                 num = num - 1 >= 0 ? num - 1 : 0;
                 $('.quantity-number').val(String(num));
-            }, 700);
+            }, 100);
         })
 
         function handleEventOnclick() {
@@ -191,6 +191,31 @@ const app = {
     }
 };
 
-$(window).on('load', function() { 
+$(".quantity-list-btn--decrease").on("click", function () {
+    let id = $(this).data("id")
+    let quantity = Number($("#quantity-cart-" + id).val())
+    console.log(quantity)
+    quantity = Math.max(quantity - 1, 0);
+
+    if(quantity == 0)
+        window.location = "/DeleteCart/" + id
+    else window.location = "/EditCart/" + id + "/" + quantity
+})
+
+$(".quantity-list-btn--increase").on("click", function () {
+    let id = $(this).data("id")
+    let quantity = Number($("#quantity-cart-" + id).val())
+    quantity += 1
+    window.location = "/EditCart/" + id + "/" + quantity
+})
+
+$(".add-to-cart-btn").on("click", function () {
+    let id = $(this).data("id")
+    let quantity = Number($(".quantity-number").val())
+    window.location = "/EditCart/" + id + "/" + quantity
+})
+
+
+$(window).on('load', function() {
     app.start();
 });

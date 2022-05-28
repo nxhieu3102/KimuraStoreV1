@@ -5,14 +5,12 @@ import KimuraStore.Dao.DiscountDao;
 import KimuraStore.Dao.ProductDao;
 import KimuraStore.Dao.SlidesDao;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Category;
-import KimuraStore.Enity.Discount;
-import KimuraStore.Enity.Slide;
+import KimuraStore.Entity.Category;
+import KimuraStore.Entity.Slide;
 import KimuraStore.Service.IHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -58,7 +56,7 @@ public class HomeServiceImpl implements IHomeService {
 
         List<ProductDto> BestSellerList = new ArrayList<ProductDto>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < Math.min(7, list.size()); i++) {
             BestSellerList.add(list.get(i));
         }
 

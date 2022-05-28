@@ -1,14 +1,13 @@
-package KimuraStore.Enity;
+package KimuraStore.Entity;
 
 public class ProductOptions {
+    private int id;
     private int productId;
     private String name;
     private double price;
-    private int id;
     private int discount_id;
     private double discount_rate;
     private double discount_money;
-
     public int getDiscount_id() {
         return discount_id;
     }

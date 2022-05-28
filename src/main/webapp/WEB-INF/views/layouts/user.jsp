@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="<c:url value="/assets/user/css/grid.css" />"/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/base.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/main.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/cart.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/product.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/singin.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/singup.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/allProduct.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/responsive.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/font/1.3.0/css/line-awesome.css" /> "/>
@@ -35,10 +38,15 @@
 <decorator:body/>
 <%@include file="/WEB-INF/views/layouts/user/footer.jsp" %>
 
-
-</body>
 <script type="text/javascript" src="<c:url value = "/assets/user/js/jquery-1.11.0.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value = "/assets/user/js/jquery-migrate-1.2.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value = "/assets/user/js/slick.min.js" />"></script>
-<script src="<c:url value = "/assets/user/js/index.js" />"></script>
+<script type="text/javascript" src="<c:url value = "/assets/user/js/index.js" />"></script>
+<decorator:getProperty property="page.script"></decorator:getProperty>
+
+
+</body>
+
+
+
 </html>

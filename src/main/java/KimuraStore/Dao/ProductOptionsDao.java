@@ -1,9 +1,8 @@
 package KimuraStore.Dao;
 
-import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Discount;
-import KimuraStore.Enity.MapperProductOptions;
-import KimuraStore.Enity.ProductOptions;
+import KimuraStore.Entity.Discount;
+import KimuraStore.Entity.Mapper.MapperProductOptions;
+import KimuraStore.Entity.ProductOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +11,8 @@ import java.util.List;
 
 @Repository
 public class ProductOptionsDao extends BaseDao {
-
     @Autowired
     DiscountDao discountDao;
-
     private void GetDiscountData(List<ProductOptions> list) {
         for (ProductOptions item : list) {
             if(item.getDiscount_id() == 0) continue;

@@ -1,11 +1,10 @@
-package KimuraStore.Enity;
+package KimuraStore.Entity;
 
 public class Slide {
     private int id;
     private String image;
 
     public Slide() {
-        super();
     }
 
     public int getId() {

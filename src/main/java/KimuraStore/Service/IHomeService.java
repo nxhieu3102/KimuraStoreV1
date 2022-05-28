@@ -1,10 +1,8 @@
 package KimuraStore.Service;
 
-import KimuraStore.Dao.DiscountDao;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Enity.Category;
-import KimuraStore.Enity.Discount;
-import KimuraStore.Enity.Slide;
+import KimuraStore.Entity.Category;
+import KimuraStore.Entity.Slide;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
