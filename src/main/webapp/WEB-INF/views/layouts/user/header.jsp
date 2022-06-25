@@ -152,7 +152,14 @@
 
                 </span>
                 <div class="header__cart-list">
-                    <c:if test="${Cart == null || Cart.size() == 0}">
+                    <c:if test="${loginInfo == null}">
+                        <div class="header__cart-list--empty" style="display: flex">
+                            <span class="header__cart-list-no-cart-msg">
+                                Bạn cần phải đăng nhập
+                            </span>
+                        </div>
+                    </c:if>
+                    <c:if test="${loginInfo != null && (Cart == null || Cart.size() == 0)}">
                         <div class="header__cart-list--empty" style="display: flex">
                             <img src="<c:url value = "/assets/user/img/no__cart.jpg" />" alt=""
                                  class="header__cart-no-cart-img"/>
@@ -161,30 +168,30 @@
                             </span>
                         </div>
                     </c:if>
-                    <c:if test="${Cart != null && Cart.size() > 0}">
+                    <c:if test="${loginInfo != null && (Cart != null && Cart.size() > 0)}">
                         <div class="header__cart-list--not-empty" style="display: block">
                             <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                             <ul class="header__cart-list-item">
                                 <!-- cart item -->
-                                <c:forEach var="item" items="${Cart}">
+                                <c:forEach var="item" items="${cartItems}">
                                     <li class="header__cart-item">
-                                        <img src="<c:url value = "/assets/user/img/product/${item.value.product.getImage()}" />" alt=""
+                                        <img src="<c:url value = "/assets/user/img/product/${item.product.getImage()}" />" alt=""
                                              class="header__cart-img"/>
                                         <div class="header__cart-item-info">
                                             <div class="header__cart-item-head">
                                                 <h5 class="header__cart-item-name">
-                                                        ${item.value.product.getName()}
+                                                        ${item.product.getName()}
                                                 </h5>
                                                 <div class="header__cart-item-price-wrap">
                                                         <span class="header__cart-item-price"><fmt:formatNumber type="number"
                                                                                                                 groupingUsed="true"
-                                                                                                                value="${item.value.totalPrice}"/>đ</span>
+                                                                                                                value="${item.totalPrice}"/>đ</span>
                                                     <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">${item.value.quantity}</span>
+                                                    <span class="header__cart-item-qnt">${item.quantity}</span>
                                                 </div>
                                             </div>
                                             <div class="header__cart-item-body">
-                                                <a href="<c:url value = "/DeleteCart/${item.value.product.getId()}" />" class="header__cart-item-remove">Xóa</a>
+                                                <a href="<c:url value = "/DeleteCart/${item.product.getId()}" />" class="header__cart-item-remove">Xóa</a>
                                             </div>
                                         </div>
                                     </li>
