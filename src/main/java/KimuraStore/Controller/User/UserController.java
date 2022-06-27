@@ -1,7 +1,10 @@
 package KimuraStore.Controller.User;
 
 import KimuraStore.Dao.UserDao;
+import KimuraStore.Entity.CartItem;
 import KimuraStore.Entity.User;
+import KimuraStore.Service.Impl.CartItemServiceImpl;
+import KimuraStore.Service.Impl.CartServiceImpl;
 import KimuraStore.Service.Impl.UserServiceImpl;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController extends BaseController {
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    CartItemServiceImpl cartItemService;
+
+    @Autowired
+    CartServiceImpl cartService;
 
     @RequestMapping(value = "/create-account", method = RequestMethod.POST)
     String CreateAccount(HttpSession session, @ModelAttribute("user")User user) {
@@ -57,6 +67,11 @@ public class UserController extends BaseController {
         else {
             user = userService.GetUserByEmail(user);
             session.setAttribute("loginInfo", user);
+
+            int cartId = cartService.GetCartByIdUser(user.getId()).getId();
+            List<CartItem> cartItems = cartItemService.GetCartItemsByCartId(cartId);
+
+            session.setAttribute("cartItem", cartItems);
             return "redirect:/";
         }
     }
