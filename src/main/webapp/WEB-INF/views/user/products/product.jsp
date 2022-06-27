@@ -98,9 +98,9 @@
                     </div>
                     <p>Số lượng: </p>
                     <div class="quantity-wrap">
-                        <button class="change-quantity quantity-btn--decrease">-</button>
-                        <input type="number" min="0" value="1" class="quantity-number">
-                        <button class="change-quantity quantity-btn--increase">+</button>
+                            <button class="change-quantity quantity-btn--decrease">-</button>
+                            <input type="number" min="0" value="1" class="quantity-number">
+                            <button class="change-quantity quantity-btn--increase">+</button>
                     </div>
                     <button class="btn product-btn add-to-cart-btn" type="submit" data-id="${product.id}">Thêm vào giỏ hàng</button>
                 </div>

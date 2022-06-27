@@ -15,25 +15,25 @@
             <div class="row">
                 <div class="cart-list l-8 m-12 c-12">
                     <h1>Giỏ Hàng</h1>
-                    <c:forEach items="${Cart}" var="item">
+                    <c:forEach items="${cartItem}" var="item">
                         <div class="cart-list__item">
                             <div class="img_wrap">
-                                <img src="<c:url value = "/assets/user/img/product/${item.value.product.getImage()}" />"
+                                <img src="<c:url value = "/assets/user/img/product/${item.image}" />"
                                      alt="" class="item_img">
                             </div>
                             <div class="item-img-des-wrap">
-                                <p>${item.value.product.getName()}</p>
+                                <p>${item.name}</p>
                                 <div class="quantity-wrap">
-                                    <button class="change-quantity quantity-list-btn--decrease" data-id="${item.value.product.getId()}">-</button>
-                                    <input type="number" min="0" value="${item.value.quantity}" class="quantity-number"
-                                           id="quantity-cart-${item.value.product.getId()}">
-                                    <button class="change-quantity quantity-list-btn--increase" data-id="${item.value.product.getId()}">+</button>
+                                    <button class="change-quantity quantity-list-btn--decrease" data-id="${item.productId}">-</button>
+                                    <input type="number" min="0" value="${item.quantity}" class="quantity-number"
+                                           id="quantity-cart-${item.productId}">
+                                    <button class="change-quantity quantity-list-btn--increase" data-id="${item.productId}">+</button>
                                 </div>
                                 <p><fmt:formatNumber type="number"
                                                      groupingUsed="true"
-                                                     value="${item.value.totalPrice}"/>đ</p>
+                                                     value="${item.totalPrice}"/>đ</p>
                             </div>
-                            <a href="<c:url value = "/DeleteCart/${item.value.product.getId()}" />"
+                            <a href="<c:url value = "/DeleteCart/${item.productId}" />"
                                class="remove-product">
                                 Xóa
                             </a>

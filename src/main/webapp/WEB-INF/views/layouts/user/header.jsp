@@ -147,8 +147,8 @@
             <div class="header__icon-item header__cart">
                 <i class="las la-shopping-cart"></i>
                 <span class="header__icon-cart-quantity">
-                    <c:if test="${Cart == null}">0</c:if>
-                    <c:if test="${Cart != null}">${Cart.size()}</c:if>
+                    <c:if test="${cartItem == null}">0</c:if>
+                    <c:if test="${cartItem != null}">${cartItem.size()}</c:if>
 
                 </span>
                 <div class="header__cart-list">
@@ -159,7 +159,7 @@
                             </span>
                         </div>
                     </c:if>
-                    <c:if test="${loginInfo != null && (Cart == null || Cart.size() == 0)}">
+                    <c:if test="${loginInfo != null && (cartItem == null || cartItem.size() == 0)}">
                         <div class="header__cart-list--empty" style="display: flex">
                             <img src="<c:url value = "/assets/user/img/no__cart.jpg" />" alt=""
                                  class="header__cart-no-cart-img"/>
@@ -168,19 +168,19 @@
                             </span>
                         </div>
                     </c:if>
-                    <c:if test="${loginInfo != null && (Cart != null && Cart.size() > 0)}">
+                    <c:if test="${loginInfo != null && (cartItem != null && cartItem.size() > 0)}">
                         <div class="header__cart-list--not-empty" style="display: block">
                             <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                             <ul class="header__cart-list-item">
                                 <!-- cart item -->
-                                <c:forEach var="item" items="${cartItems}">
+                                <c:forEach var="item" items="${cartItem}">
                                     <li class="header__cart-item">
-                                        <img src="<c:url value = "/assets/user/img/product/${item.product.getImage()}" />" alt=""
+                                        <img src="<c:url value = "/assets/user/img/product/${item.image}" />" alt=""
                                              class="header__cart-img"/>
                                         <div class="header__cart-item-info">
                                             <div class="header__cart-item-head">
                                                 <h5 class="header__cart-item-name">
-                                                        ${item.product.getName()}
+                                                        ${item.name}
                                                 </h5>
                                                 <div class="header__cart-item-price-wrap">
                                                         <span class="header__cart-item-price"><fmt:formatNumber type="number"
@@ -191,7 +191,7 @@
                                                 </div>
                                             </div>
                                             <div class="header__cart-item-body">
-                                                <a href="<c:url value = "/DeleteCart/${item.product.getId()}" />" class="header__cart-item-remove">Xóa</a>
+                                                <a href="<c:url value = "/DeleteCart/${item.productId}" />" class="header__cart-item-remove">Xóa</a>
                                             </div>
                                         </div>
                                     </li>
