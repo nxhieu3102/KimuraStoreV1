@@ -1,19 +1,21 @@
 package KimuraStore.Controller.User;
 
-import KimuraStore.Dto.CartDto;
+
+import KimuraStore.Entity.Bill;
 import KimuraStore.Entity.CartItem;
 import KimuraStore.Entity.User;
+import KimuraStore.Service.Impl.BillServiceImpl;
 import KimuraStore.Service.Impl.CartItemServiceImpl;
 import KimuraStore.Service.Impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,28 +24,30 @@ public class CartController extends BaseController   {
     private CartServiceImpl cartService;
     @Autowired
     private CartItemServiceImpl cartItemService;
-    @RequestMapping(value = "xem-gio-hang")
+    @Autowired
+    private BillServiceImpl billService;
+    @RequestMapping(value = "xem-gio-hang", method = RequestMethod.GET)
     public ModelAndView CartInfo(HttpSession session) {
         _mvShare.setViewName("/user/cart/list_cart");
+        _mvShare.addObject("BillInfo", new Bill());
         List<CartItem> cartItems = (List<CartItem>)session.getAttribute("cartItem");
-
         session.setAttribute("TotalPrice", cartItemService.GetTotalPriceAllItems(cartItems));
         return _mvShare;
     }
 
-//    @RequestMapping(value = "AddCart/{id}")
-//    public String AddCart(HttpServletRequest request, HttpSession session, @PathVariable int id) {
-//        HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
-//        if(cart == null) {
-//            cart = new HashMap<Integer, CartDto>();
-//        }
-//        cart = cartService.AddCart(id, cart);
-//        session.setAttribute("Cart", cart);
-//        session.setAttribute("TotalPrice", cartService.GetTotalPrice(cart));
-//        return "redirect:" + request.getHeader("Referer");
-//    }
-//
-//
+    @RequestMapping(value = "xem-gio-hang", method = RequestMethod.POST)
+    public String CheckOut(HttpServletRequest request, HttpSession session, @ModelAttribute("BillInfo") Bill bill){
+        User user = (User)session.getAttribute("loginInfo");
+        bill.setUserId(user.getId());
+        bill.setTotalPrice((double)session.getAttribute("TotalPrice"));
+
+        billService.InsertBill(bill);
+
+        session.setAttribute("messageCheckout", "Xin cảm ơn quý khách đã mua hàng của chúng tôi");
+        session.removeAttribute("cartItem");
+        return "redirect:" + request.getHeader("Referer");
+    }
+
     @RequestMapping(value = "AddCart/{id}")
     public String AddCart(HttpServletRequest request, HttpSession session, @PathVariable int id) {
         User user = (User)session.getAttribute("loginInfo");
@@ -88,31 +92,4 @@ public class CartController extends BaseController   {
         }
         return "redirect:" + request.getHeader("Referer");
     }
-
-//    @RequestMapping(value = "EditCart/{id}/{quantity}")
-//    public String AddCart(HttpServletRequest request, HttpSession session, @PathVariable int id, @PathVariable int quantity) {
-//        HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
-//        if(cart == null) {
-//            cart = new HashMap<Integer, CartDto>();
-//        }
-//        if(cart.get(id) == null)
-//            cart = cartService.AddCart(id, cart);
-//        cart = cartService.EditCart(id, quantity, cart);
-//        session.setAttribute("Cart", cart);
-//        session.setAttribute("TotalPrice", cartService.GetTotalPrice(cart));
-//        return "redirect:" + request.getHeader("Referer");
-//    }
-
-//    @RequestMapping(value = "DeleteCart/{id}")
-//    public String DeleteCart(HttpServletRequest request, HttpSession session, @PathVariable int id) {
-//        HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
-//        if(cart == null) {
-//            cart = new HashMap<Integer, CartDto>();
-//        }
-//
-//        cart = cartService.DeleteCart(id, cart);
-//        session.setAttribute("Cart", cart);
-//        session.setAttribute("TotalPrice", cartService.GetTotalPrice(cart));
-//        return "redirect:" + request.getHeader("Referer");
-//    }
 }
