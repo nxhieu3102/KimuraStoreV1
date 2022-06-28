@@ -15,6 +15,8 @@ import java.util.Map;
 public class CartDao extends BaseDao {
     @Autowired
     ProductDao productDao;
+    @Autowired
+    CartItemDao cartItemDao;
 
     public Cart GetCartByIdUser(int id) {
         String sql = "SELECT * FROM cart WHERE user_id = " + id;
@@ -25,62 +27,39 @@ public class CartDao extends BaseDao {
         return cartList.get(0);
     }
 
-    public HashMap<Integer, CartDto> AddCart(int id, HashMap<Integer, CartDto> cart) {
-        CartDto itemCart = new CartDto();
-        ProductDto product = productDao.GetProductById(id);
+    public void AddCart(int userId, int itemId) {
+        String sql = "SELECT * FROM cart WHERE user_id = " + userId;
+        List<Cart> cart = _jdbcTemplate.query(sql, new MapperCart());
 
-        if(cart == null || product == null)
-            return null;
-
-        if (cart.containsKey(id)) {
-            itemCart = cart.get(id);
-            itemCart.setQuantity(itemCart.getQuantity() + 1);
-            itemCart.setTotalPrice(product.getPrice() * itemCart.getQuantity());
-        }else {
-            itemCart.setProduct(product);
-            itemCart.setQuantity(1);
-            itemCart.setTotalPrice(product.getPrice());
+        if(cart.size() == 0) {
+            CreateCart(userId);
+            cart = _jdbcTemplate.query(sql, new MapperCart());
         }
 
-        cart.put(id, itemCart);
-
-        return cart;
+        cartItemDao.AddCart(cart.get(0).getId(), itemId);
     }
 
-    public HashMap<Integer, CartDto> EditCart(int id, int quantity, HashMap<Integer, CartDto> cart) {
-        if (cart == null) return null;
+    public void DeleteCart(int userId, int itemId) {
+        String sql = "SELECT * FROM cart WHERE user_id = " + userId;
+        List<Cart> cart = _jdbcTemplate.query(sql, new MapperCart());
 
-        CartDto itemCart = new CartDto();
-        if (cart.containsKey(id)) {
-            itemCart = cart.get(id);
-            itemCart.setQuantity(quantity);
-            itemCart.setTotalPrice(quantity * itemCart.getProduct().getPrice());
-        }
-        cart.put(id, itemCart);
-        return cart;
+        cartItemDao.DeleteCart(cart.get(0).getId(), itemId);
     }
 
-    public HashMap<Integer, CartDto> DeleteCart(int id, HashMap<Integer, CartDto> cart) {
-        if (cart == null) return null;
-        if (cart.containsKey(id)) {
-            cart.remove(id);
+    public void EditCart(int userId, int itemId, int quantity) {
+        String sql = "SELECT * FROM cart WHERE user_id = " + userId;
+        List<Cart> cart = _jdbcTemplate.query(sql, new MapperCart());
+
+        if(cart.size() == 0) {
+            CreateCart(userId);
+            cart = _jdbcTemplate.query(sql, new MapperCart());
         }
-        return cart;
+
+        cartItemDao.EditCart(cart.get(0).getId(), itemId, quantity);
     }
 
-    public int GetTotalQuantity(HashMap<Integer, CartDto> cart) {
-        int totalQuantity = 0;
-        for (Map.Entry<Integer, CartDto> item : cart.entrySet()) {
-            totalQuantity += item.getValue().getQuantity();
-        }
-        return totalQuantity;
-    }
-
-    public double GetTotalPrice(HashMap<Integer, CartDto> cart) {
-        double totalPrice = 0;
-        for (Map.Entry<Integer, CartDto> item : cart.entrySet()) {
-            totalPrice += item.getValue().getTotalPrice();
-        }
-        return totalPrice;
+    private void CreateCart(int userId) {
+        String sql = "INSERT INTO cart (user_id) values (" + userId + ")";
+        _jdbcTemplate.update(sql);
     }
 }
