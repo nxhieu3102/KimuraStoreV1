@@ -9,7 +9,6 @@
 .non-product{
     padding: 40px;
     background-color: var(--white-color);
-    display: none;
 }
 
 .non-product h1{
@@ -108,22 +107,20 @@
     text-decoration: none;
 }
 
-
-
 /* total money */
 
-.total-money{
+.checkout-infor{
     padding: 20px;
     width: 300px;
 }
 
-.total-money > h1{
+.checkout-infor > h1{
     text-align: center;
     font-size: 3rem;
     color: var(--red-color);
 }
 
-.total-money > button{ 
+.checkout-infor > button{
     width: 100%;
     font-size: 16px;
     padding: 8px;
@@ -135,6 +132,30 @@
 }
 
 
+.checkout-infor__input{
+    outline: none;
+    width: 100%;
+    margin-top: 6px;
+    padding: 8px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    color:#333;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.input-header{
+    margin-top: 20px;
+
+    color: var(--text-color);
+    font-size: 1.6rem   ;
+    font-weight: bold;
+}
+
+::placeholder{
+    color: #555 !important;
+}
 
 .total-money__price{
     display: flex;
@@ -151,4 +172,3 @@
     font-size: 1.6rem;
     color: var(--text-color);
 }
-
