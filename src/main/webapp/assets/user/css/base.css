@@ -352,7 +352,7 @@ p {
     -webkit-tap-highlight-color: transparent;
 }
 
-.header__cart-list {
+.header__cart-list{
     z-index: 1;
     position: absolute;
     top: calc(100% + 10px);
@@ -738,7 +738,7 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
 }
 
-.header__user-info::after {
+.header__user-info::before {
     cursor: pointer;
     content: "";
     position: absolute;
@@ -747,4 +747,14 @@ input[type="number"]::-webkit-outer-spin-button {
     border-width: 16px 20px;
     border-style: solid;
     border-color: transparent transparent var(--white-color) transparent;
+}
+
+.header__user-info::after {
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -26px;
+    width: 100%;
+    height: 30px;
 }
