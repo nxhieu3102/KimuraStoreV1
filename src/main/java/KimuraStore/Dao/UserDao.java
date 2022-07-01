@@ -2,6 +2,7 @@ package KimuraStore.Dao;
 
 import KimuraStore.Entity.Mapper.MapperUser;
 import KimuraStore.Entity.User;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,6 +42,31 @@ public class UserDao extends BaseDao {
             return null;
 
         return list.get(0);
+    }
+
+    public void SaveToken(String token, int id) {
+        String sql = "UPDATE user SET `reset_password_token` = '" + token + "' WHERE id = " + id;
+        _jdbcTemplate.update(sql);
+    }
+
+    public boolean CheckToken(String token, String email) {
+        User user = GetUserByEmail(email);
+
+        if(user == null)
+            return false;
+
+        String resetPasswordToken = user.getResetPasswordToken();
+        if(resetPasswordToken.equals(token))
+            return true;
+
+        return false;
+    }
+
+    public void ChangePassword(String password, User user) {
+        int id = user.getId();
+        password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        String sql = "UPDATE user SET `password` = '" + password + "' WHERE id = " + id;
+        _jdbcTemplate.update(sql);
     }
 
 }

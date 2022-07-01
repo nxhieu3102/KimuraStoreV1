@@ -7,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserServiceImpl implements IUserService {
     @Autowired
@@ -26,13 +27,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean checkAccount(User user) {
+    public boolean CheckAccount(User user) {
         String password = user.getPassword();
         user = userDao.GetUserByEmail(user.getEmail());
 
         if(user == null)
             return false;
-
         if(BCrypt.checkpw(password, user.getPassword()))
             return true;
         
@@ -40,7 +40,24 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User GetUserByEmail(User user) {
-        return userDao.GetUserByEmail(user.getEmail());
+    public User GetUserByEmail(String email) {
+        return userDao.GetUserByEmail(email);
     }
+
+    @Override
+    public void SaveToken(String token, int id) {
+        userDao.SaveToken(token, id);
+    }
+
+    @Override
+    public boolean CheckToken(String token, String email) {
+        return userDao.CheckToken(token, email);
+    }
+
+    @Override
+    public void ChangePassword(String password, User user) {
+        userDao.ChangePassword(password, user);
+    }
+
+
 }

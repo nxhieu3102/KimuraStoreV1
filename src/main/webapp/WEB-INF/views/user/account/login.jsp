@@ -32,7 +32,7 @@
                             <form:input type="password" placeholder="Mật khẩu" path="password"/>
                         </div>
                     </div>
-                    <p class="forget-password">Quên mật khẩu? Nhấn vào <a href="">đây</a></p>
+                    <p class="forget-password">Quên mật khẩu? Nhấn vào <a href="/forgot-password">đây</a></p>
                     <h1 style="font-size: 14px; color: var(--red-color); margin-top: 10px;">${messsage_login_account}</h1>
                     <button class="btn" type="submit">Đăng Nhập</button>
                 </div>

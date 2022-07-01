@@ -14,6 +14,8 @@ public class MapperUser implements RowMapper<User> {
         user.setPassword(resultSet.getString("password"));
         user.setDisplay_name(resultSet.getString("display_name"));
         user.setEmail(resultSet.getString("email"));
+        user.setResetPasswordToken(resultSet.getString("reset_password_token"));
+        user.setResetPasswordTokenTimeCreated(resultSet.getDate("reset_password_token_time_created"));
         return user;
     }
 }
