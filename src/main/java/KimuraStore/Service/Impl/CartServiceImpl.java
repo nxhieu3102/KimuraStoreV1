@@ -33,4 +33,9 @@ public class CartServiceImpl implements ICartService {
     public Cart GetCartByIdUser(int id) {
         return cartDao.GetCartByIdUser(id);
     }
+
+    @Override
+    public void CreateCart(int id) {
+        cartDao.CreateCart(id);
+    }
 }

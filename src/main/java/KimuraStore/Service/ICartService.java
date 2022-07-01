@@ -12,4 +12,5 @@ public interface ICartService {
     public void DeleteCart(int userId, int itemId);
     public void EditCart(int userId, int itemId, int quantity);
     public Cart GetCartByIdUser(int id);
+    public void CreateCart(int id);
 }
