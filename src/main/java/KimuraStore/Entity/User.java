@@ -1,11 +1,14 @@
 package KimuraStore.Entity;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private String password;
     private String display_name;
     private String email;
-
+    private String resetPasswordToken;
+    private Date resetPasswordTokenTimeCreated;
     public User(){}
 
     public int getId() {
@@ -38,5 +41,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Date getResetPasswordTokenTimeCreated() {
+        return resetPasswordTokenTimeCreated;
+    }
+
+    public void setResetPasswordTokenTimeCreated(Date resetPasswordTokenTimeCreated) {
+        this.resetPasswordTokenTimeCreated = resetPasswordTokenTimeCreated;
     }
 }
