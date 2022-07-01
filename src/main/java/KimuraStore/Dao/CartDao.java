@@ -58,7 +58,7 @@ public class CartDao extends BaseDao {
         cartItemDao.EditCart(cart.get(0).getId(), itemId, quantity);
     }
 
-    private void CreateCart(int userId) {
+    public void CreateCart(int userId) {
         String sql = "INSERT INTO cart (user_id) values (" + userId + ")";
         _jdbcTemplate.update(sql);
     }
