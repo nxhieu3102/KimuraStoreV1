@@ -1,6 +1,7 @@
 package KimuraStore.Controller.User;
 
 import KimuraStore.Dao.UserDao;
+import KimuraStore.Entity.Cart;
 import KimuraStore.Entity.CartItem;
 import KimuraStore.Entity.User;
 import KimuraStore.Service.Impl.CartItemServiceImpl;
@@ -60,14 +61,17 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/login-account", method = RequestMethod.POST)
     String LoginAccount(HttpSession session, @ModelAttribute("user") User user) {
-        if(!userService.checkAccount(user)) {
+        if(!userService.CheckAccount(user)) {
             session.setAttribute("messsage_login_account", "Thông tin đăng nhập sai !");
             return "redirect:/dang-nhap";
         }
         else {
-            user = userService.GetUserByEmail(user);
+            user = userService.GetUserByEmail(user.getEmail());
             session.setAttribute("loginInfo", user);
 
+            Cart cart = cartService.GetCartByIdUser(user.getId());
+            if(cart == null)
+                cartService.CreateCart(user.getId());
             int cartId = cartService.GetCartByIdUser(user.getId()).getId();
             List<CartItem> cartItems = cartItemService.GetCartItemsByCartId(cartId);
 
