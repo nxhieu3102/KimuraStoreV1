@@ -106,4 +106,14 @@
 
     </dependencies>
 
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.8</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
