@@ -8,7 +8,7 @@
 <%@page import="javax.servlet.http.HttpSession" %>
 
 <body>
-<div class="cart-container">
+<div class="base-container">
     <div class="grid wide">
         <c:if test="${cartItem == null or cartItem.size() == 0}">
             <div class="non-product">

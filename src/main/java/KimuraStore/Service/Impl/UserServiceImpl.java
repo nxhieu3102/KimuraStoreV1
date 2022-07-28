@@ -59,5 +59,10 @@ public class UserServiceImpl implements IUserService {
         userDao.ChangePassword(password, user);
     }
 
+    @Override
+    public void ChangeInfo(String name, String email, User user) {
+        userDao.ChangeInfo(name, email, user);
+    }
+
 
 }

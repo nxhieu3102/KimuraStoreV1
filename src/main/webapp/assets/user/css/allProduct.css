@@ -4,7 +4,7 @@ html {
 
 .allproduct-container {
     padding-top: calc(var(--header-height) + 50px);
-    min-height: calc(100vh - var(--footer-height) - 100px - var(--header-height));
+    min-height: calc(100vh - var(--footer-height) - var(--header-height));
     background-color: #f8f8f8;
     width: 100%;
     margin-bottom: 50px;

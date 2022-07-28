@@ -14,6 +14,13 @@ public class CartItemDao extends BaseDao {
     @Autowired
     ProductDao productDao;
 
+    public CartItem GetCartItemById(int cartItemId) {
+        String sql = "SELECT * FROM cart_item WHERE id = " + cartItemId;
+        List<CartItem> cartItems = _jdbcTemplate.query(sql, new MapperCartItem());
+        if(cartItems != null)
+            return cartItems.get(0);
+        return null;
+    }
     public List<CartItem> GetCartItemsByCartId(int cart_id) {
         String sql = "SELECT * FROM cart_item where cart_id = " + cart_id;
         List<CartItem> cartItems = _jdbcTemplate.query(sql, new MapperCartItem());
@@ -23,27 +30,27 @@ public class CartItemDao extends BaseDao {
         return cartItems;
     }
 
-    public void AddCart(int cartId, int itemId) {
+    public void AddItemToCart(int cartId, int itemId) {
         String sql = "select * from cart_item where ( cart_id = " + cartId
                 + " and product_id = " + itemId + " )";
 
         List<CartItem> cartItem = _jdbcTemplate.query(sql, new MapperCartItem());
 
         if (cartItem.size() == 0) {
-            UpdateCartItem(cartId, itemId, 1);
+            UpdateQuantityOfItemCart(cartId, itemId, 1);
         } else {
-            UpdateCartItem(cartId, itemId, cartItem.get(0).getQuantity() + 1);
+            UpdateQuantityOfItemCart(cartId, itemId, cartItem.get(0).getQuantity() + 1);
         }
     }
 
-    public void DeleteCart(int cartId, int itemId) {
-        UpdateCartItem(cartId, itemId, 0);
+    public void DeleteItemFromCart(int cartId, int itemId) {
+        UpdateQuantityOfItemCart(cartId, itemId, 0);
     }
 
     public void EditCart(int cartId, int itemId, int quantity) {
-        UpdateCartItem(cartId, itemId, quantity);
+        UpdateQuantityOfItemCart(cartId, itemId, quantity);
     }
-    private void UpdateCartItem(int cartId, int itemId, int quantity) {
+    private void UpdateQuantityOfItemCart(int cartId, int itemId, int quantity) {
         String sql = "select * from cart_item where ( cart_id = " + cartId
                 + " and product_id = " + itemId + " )";
 

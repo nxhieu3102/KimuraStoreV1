@@ -1,7 +1,6 @@
 package KimuraStore.Service.Impl;
 
 import KimuraStore.Dao.CategoryDao;
-import KimuraStore.Dao.DiscountDao;
 import KimuraStore.Dao.ProductDao;
 import KimuraStore.Dao.SlidesDao;
 import KimuraStore.Dto.ProductDto;
@@ -27,10 +26,6 @@ public class HomeServiceImpl implements IHomeService {
 
     @Autowired
     private CategoryDao categoryDao;
-
-    @Autowired
-    private DiscountDao discountDao;
-
     @Override
     public List<Slide> GetDataSlide() {
         return slidesDao.GetDataSlide();
@@ -39,11 +34,6 @@ public class HomeServiceImpl implements IHomeService {
     @Override
     public List<Category> GetDataCategory() {
         return categoryDao.GetDataCategory();
-    }
-
-    @Override
-    public List<ProductDto> GetDiscountProduct() {
-        return productDao.GetDiscountProduct();
     }
 
     public List<ProductDto> GetBestSellerProduct() {
@@ -61,5 +51,17 @@ public class HomeServiceImpl implements IHomeService {
         }
 
         return BestSellerList;
+    }
+
+    public List<ProductDto> GetDiscountProduct() {
+        List<ProductDto> products = productDao.GetDataProduct();
+        List<ProductDto> discountProducts = new ArrayList<ProductDto>();
+
+        for (ProductDto product: products) {
+            if(product.getDiscount_rate() > 0.0) {
+                discountProducts.add(product);
+            }
+        }
+        return discountProducts;
     }
 }

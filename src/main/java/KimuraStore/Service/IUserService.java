@@ -12,4 +12,5 @@ public interface IUserService {
     public void SaveToken(String token, int id);
     public boolean CheckToken(String token, String email);
     public void ChangePassword(String password, User user);
+    public void ChangeInfo(String name, String email, User user);
 }

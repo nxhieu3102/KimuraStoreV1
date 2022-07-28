@@ -13,7 +13,5 @@ public interface IHomeService {
 
     public List<Category> GetDataCategory();
 
-    public List<ProductDto> GetDiscountProduct();
-
     public List<ProductDto> GetBestSellerProduct();
 }

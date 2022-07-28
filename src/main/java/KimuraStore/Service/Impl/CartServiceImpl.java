@@ -15,13 +15,13 @@ public class CartServiceImpl implements ICartService {
     private CartDao cartDao;
 
     @Override
-    public void AddCart(int userId, int itemId) {
-        cartDao.AddCart(userId, itemId);
+    public void AddItemToCart(int userId, int itemId) {
+        cartDao.AddItemToCart(userId, itemId);
     }
 
     @Override
-    public void DeleteCart(int userId, int itemId) {
-        cartDao.DeleteCart(userId, itemId);
+    public void DeleteItemFromCart(int userId, int itemId) {
+        cartDao.DeleteItemFromCart(userId, itemId);
     }
 
     @Override
@@ -38,4 +38,11 @@ public class CartServiceImpl implements ICartService {
     public void CreateCart(int id) {
         cartDao.CreateCart(id);
     }
+
+    @Override
+    public void RemoveCart(int userId) {
+        cartDao.RemoveCart(userId);
+    }
+
+
 }

@@ -106,10 +106,12 @@
 
         <div class="header__search">
             <div class="header__search-input">
-                <input type="text" class="header__search-input-box" placeholder="Tìm kiếm sản phẩm"/>
+                <form action="/search" method="post" style="height: 100%" id="searchForm">
+                    <input type="text" name="keyword" class="header__search-input-box" placeholder="Tìm kiếm sản phẩm"/>
+                </form>
             </div>
             <div class="header__search-button">
-                <button class="header__search-button-item">
+                <button class="header__search-button-item" type="submit" form="searchForm">
                     <i class="fas fa-search header__search-button-icon"></i>
                 </button>
             </div>
@@ -130,7 +132,7 @@
                 <i class="far fa-user"></i>
                 <a style="text-decoration: none; font-size: 14px; margin-left: 5px">${loginInfo.getDisplay_name()}</a>
                 <div class="header__user-info">
-                    <a href="" class="header__user-info-text">Thông tin cá nhân</a>
+                    <a href="/thong-tin" class="header__user-info-text">Thông tin cá nhân</a>
                     <a href="/dang-xuat" class="header__user-info-text">Đăng xuất</a>
                 </div>
             </div>

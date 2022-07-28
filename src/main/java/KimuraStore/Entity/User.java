@@ -9,6 +9,8 @@ public class User {
     private String email;
     private String resetPasswordToken;
     private Date resetPasswordTokenTimeCreated;
+    private String role;
+
     public User(){}
 
     public int getId() {
@@ -57,5 +59,12 @@ public class User {
 
     public void setResetPasswordTokenTimeCreated(Date resetPasswordTokenTimeCreated) {
         this.resetPasswordTokenTimeCreated = resetPasswordTokenTimeCreated;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

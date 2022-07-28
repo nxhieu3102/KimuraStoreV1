@@ -15,7 +15,7 @@
 
 <body>
 
-<div class="signin-container">
+<div class="base-container">
     <div class="grid wide">
         <div class="singin-form">
             <h1>Đăng Ký Tài Khoản</h1>

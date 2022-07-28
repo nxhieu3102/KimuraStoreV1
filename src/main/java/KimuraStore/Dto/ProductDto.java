@@ -8,12 +8,10 @@ public class ProductDto {
     private int category_id;
     private String name;
     private String detail;
-    private int discount_id;
     private double discount_rate;
     private double discount_money;
     private int quantity_sell;
     private double price;
-    private double price_min;
     private double price_max;
     private Date create_at;
     private Date modify_at;
@@ -51,14 +49,6 @@ public class ProductDto {
         this.detail = detail;
     }
 
-    public int getDiscount_id() {
-        return discount_id;
-    }
-
-    public void setDiscount_id(int discount_id) {
-        this.discount_id = discount_id;
-    }
-
     public double getDiscount_rate() {
         return discount_rate;
     }
@@ -91,13 +81,6 @@ public class ProductDto {
         this.price = price;
     }
 
-    public double getPrice_min() {
-        return price_min;
-    }
-
-    public void setPrice_min(double price_min) {
-        this.price_min = price_min;
-    }
 
     public double getPrice_max() {
         return price_max;

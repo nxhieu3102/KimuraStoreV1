@@ -16,6 +16,7 @@ public class MapperBill implements RowMapper<Bill> {
         bill.setAddress(resultSet.getString("address"));
         bill.setTotalPrice(resultSet.getDouble("total_price"));
         bill.setName(resultSet.getString("name"));
+        bill.setCheckoutDate(resultSet.getDate("date_checkout"));
 
         return bill;
     }

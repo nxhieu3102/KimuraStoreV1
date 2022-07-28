@@ -1,9 +1,11 @@
 package KimuraStore.Controller.User;
 
 
+import KimuraStore.Dao.ProductDao;
 import KimuraStore.Entity.Bill;
 import KimuraStore.Entity.CartItem;
 import KimuraStore.Entity.User;
+import KimuraStore.Service.Impl.BillProductDetailsServiceImpl;
 import KimuraStore.Service.Impl.BillServiceImpl;
 import KimuraStore.Service.Impl.CartItemServiceImpl;
 import KimuraStore.Service.Impl.CartServiceImpl;
@@ -26,6 +28,11 @@ public class CartController extends BaseController   {
     private CartItemServiceImpl cartItemService;
     @Autowired
     private BillServiceImpl billService;
+    @Autowired
+    private ProductDao productDao;
+
+    @Autowired
+    private BillProductDetailsServiceImpl billProductDetailsService;
     @RequestMapping(value = "xem-gio-hang", method = RequestMethod.GET)
     public ModelAndView CartInfo(HttpSession session) {
         _mvShare.setViewName("/user/cart/list_cart");
@@ -40,11 +47,21 @@ public class CartController extends BaseController   {
         User user = (User)session.getAttribute("loginInfo");
         bill.setUserId(user.getId());
         bill.setTotalPrice((double)session.getAttribute("TotalPrice"));
-
         billService.InsertBill(bill);
+
+        int id = billService.GetLastInsertBillId();
+        List<CartItem> cartItems = (List<CartItem>)session.getAttribute("cartItem");
+
+        for(CartItem item : cartItems) {
+            billProductDetailsService.AddProductDetails(id, item.getId());
+            int productId = item.getProductId();
+            productDao.IncreaseQuantitySell(productId, item.getQuantity());
+        }
 
         session.setAttribute("messageCheckout", "Xin cảm ơn quý khách đã mua hàng của chúng tôi");
         session.removeAttribute("cartItem");
+        cartService.RemoveCart(user.getId());
+
         return "redirect:" + request.getHeader("Referer");
     }
 
@@ -53,7 +70,7 @@ public class CartController extends BaseController   {
         User user = (User)session.getAttribute("loginInfo");
         if(user != null) {
             int userId = user.getId();
-            cartService.AddCart(userId, id);
+            cartService.AddItemToCart(userId, id);
 
             int cartId = cartService.GetCartByIdUser(userId).getId();
             List<CartItem> cartItems = cartItemService.GetCartItemsByCartId(cartId);
@@ -67,7 +84,7 @@ public class CartController extends BaseController   {
     @RequestMapping(value = "DeleteCart/{id}")
     public String DeleteCart(HttpServletRequest request, HttpSession session, @PathVariable int id) {
         int userId = ((User)session.getAttribute("loginInfo")).getId();
-        cartService.DeleteCart(userId, id);
+        cartService.DeleteItemFromCart(userId, id);
 
         int cartId = cartService.GetCartByIdUser(userId).getId();
         List<CartItem> cartItems = cartItemService.GetCartItemsByCartId(cartId);

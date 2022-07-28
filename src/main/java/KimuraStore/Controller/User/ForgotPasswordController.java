@@ -84,7 +84,7 @@ public class ForgotPasswordController extends BaseController {
         String confirmPassword = request.getParameter("confirm-password");
         String email = (String) session.getAttribute("email");
 
-        if(password == confirmPassword) {
+        if(password.equals(confirmPassword)) {
             User user = userService.GetUserByEmail(email);
             userService.ChangePassword(password, user);
             mv.addObject("message", "Thay đổi mật khẩu thành công");

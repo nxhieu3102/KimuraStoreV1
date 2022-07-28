@@ -67,6 +67,10 @@ public class UserController extends BaseController {
         }
         else {
             user = userService.GetUserByEmail(user.getEmail());
+            if(user.getRole().equals("admin")) {
+                session.setAttribute("loginInfo", user);
+                return "redirect:/admin/product";
+            }
             session.setAttribute("loginInfo", user);
 
             Cart cart = cartService.GetCartByIdUser(user.getId());

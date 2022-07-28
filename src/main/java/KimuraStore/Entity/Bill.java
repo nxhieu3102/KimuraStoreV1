@@ -3,13 +3,13 @@ package KimuraStore.Entity;
 import java.util.Date;
 
 public class Bill {
-    public int id;
-    public int userId;
-    public String phone;
-    public String address;
-    public double totalPrice;
-    public String name;
-    public Date checkoutDate;
+    private int id;
+    private int userId;
+    private String phone;
+    private String address;
+    private double totalPrice;
+    private String name;
+    private Date checkoutDate;
 
     public Bill(){}
 

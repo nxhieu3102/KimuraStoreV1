@@ -15,7 +15,7 @@
 
 <body>
 
-<div class="forgot-password-container">
+<div class="base-container">
     <div style="text-align:center">
         <h2 style="font-size: 22px;">
             Quên mật khẩu

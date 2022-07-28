@@ -15,22 +15,30 @@ public class UserDao extends BaseDao {
         return  sql;
     }
 
-    public void AddAccount(User user) {
+    public boolean AddAccount(User user) {
+        User c = GetUserByEmail(user.getEmail());
+        if(c != null)
+            return false;
+
         StringBuffer sql = new StringBuffer();
         sql.append("INSERT ");
         sql.append("into user( ");
         sql.append("email, ");
         sql.append("password, ");
-        sql.append("display_name ");
+        sql.append("display_name, ");
+        sql.append("role ");
         sql.append(") ");
         sql.append("values ");
         sql.append("( ");
         sql.append("'"+ user.getEmail()+ "', ");
         sql.append("'"+ user.getPassword()+ "', ");
-        sql.append("'"+ user.getDisplay_name()+ "' ");
+        sql.append("'"+ user.getDisplay_name()+ "', ");
+        sql.append("'"+ user.getRole()+ "' ");
+
         sql.append(")");
 
         _jdbcTemplate.update(sql.toString());
+        return true;
     }
 
     public User GetUserByEmail(String email) {
@@ -69,4 +77,42 @@ public class UserDao extends BaseDao {
         _jdbcTemplate.update(sql);
     }
 
+    public void ChangeInfo(String name, String email, User user) {
+        //UPDATE `kimurastore`.`user` SET `email` = 'ab@gmail.com', `display_name` = 'hieu dz' WHERE (`id` = '12');
+        int id = user.getId();
+        String sql = "UPDATE user SET `email` = '" + email + "', `display_name` = '" + name + "' WHERE id = " + id;
+        _jdbcTemplate.update(sql);
+    }
+
+    public List<User> GetDataUser() {
+        String sql = "SELECT * FROM user";
+        List<User> users = _jdbcTemplate.query(sql, new MapperUser());
+        return users;
+    }
+
+    public void DeleteUser(int id) {
+        String sql = "DELETE FROM user WHERE id = " + id;
+        _jdbcTemplate.update(sql);
+    }
+
+    public boolean EditUser(int id, String name, String email, String role) {
+        //UPDATE `kimurastore`.`user` SET `email` = 'aaa@gmail.com', `display_name` = 'Hiếu đẹp trai' WHERE (`id` = '13');
+        String sql = "SELECT * FROM user WHERE email = '" + email + "'";
+        List<User> user = _jdbcTemplate.query(sql, new MapperUser());
+
+        if(user.size() > 0)
+            return false;
+
+        sql = "UPDATE user SET email = '" + email + "', display_name = '" + name + "', role = " + role + " WHERE id = " + id;
+        _jdbcTemplate.update(sql);
+        return true;
+    }
+
+    public User GetUserById(int id) {
+        String sql = "SELECT * FROM user WHERE id = " + id;
+        List<User> user = _jdbcTemplate.query(sql, new MapperUser());
+        if(user.size() == 0)
+            return null;
+        return user.get(0);
+    }
 }

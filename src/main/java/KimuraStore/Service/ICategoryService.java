@@ -13,6 +13,12 @@ public interface ICategoryService {
     Category GetDataCategoryById(int id);
 
     public List<ProductDto> GetProductByIdCategory(int id);
+    public List<ProductDto> GetProductByIdCategoryAndFilter(String price, String sort, int id);
 
     public List<ProductDto> GetDataProductsPaginate(int id, int start, int totalProductsInPage);
+
+    public List<ProductDto> GetProductsPaginate(String price, String sort, int id, int start, int totalProductsInPage);
+    public void AddCategory(String category);
+    public void DeleteCategory(int id);
+    public void UpdateCategory(int id, String name);
 }

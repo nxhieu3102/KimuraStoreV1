@@ -2,8 +2,6 @@ package KimuraStore.Dao;
 
 import KimuraStore.Dto.MapperProductDto;
 import KimuraStore.Dto.ProductDto;
-import KimuraStore.Entity.Discount;
-import KimuraStore.Entity.ProductOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,121 +10,70 @@ import java.util.List;
 
 @Repository
 public class ProductDao extends BaseDao {
-    @Autowired
-    ProductOptionsDao productOptionsDao;
-
-    @Autowired
-    DiscountDao discountDao;
-
-    private StringBuffer SqlString() {
-        StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ");
-        sql.append("id, ");
-        sql.append("category_id, ");
-        sql.append("name, ");
-        sql.append("detail, ");
-        sql.append("discount_id, ");
-        sql.append("discount_rate, ");
-        sql.append("discount_money, ");
-        sql.append("quantity_sell, ");
-        sql.append("price, ");
-        sql.append("price_min, ");
-        sql.append("price_max, ");
-        sql.append("create_at, ");
-        sql.append("modify_at, ");
-        sql.append("image ");
-        sql.append("FROM product as p ");
-        return sql;
-    }
-
     private String SqlRelatedProductsByIDCategory(int id) {
-        StringBuffer sql = SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND category_id  = " + id + " ");
-        sql.append("ORDER BY RAND() ");
-        sql.append("LIMIT 5 ");
-        return sql.toString();
-    }
-
-    private StringBuffer SqlProductsByID(int id) {
-        StringBuffer sql = SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND id = " + id + " ");
+        String sql = "SELECT * from product WHERE category_id = " + id + " ORDER BY RAND() LIMIT 5";
         return sql;
     }
 
-    private StringBuffer SqlProductsByIDCategory(int id) {
-        StringBuffer sql = SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND category_id = " + id + " ");
+    private String SqlProductsByID(int id) {
+        String sql = "SELECT * FROM product WHERE id = " + id;
         return sql;
     }
 
-    private String SqlDiscountProduct() {
-        StringBuffer sql = SqlString();
-        sql.append("WHERE 1 = 1 ");
-        sql.append("AND discount_id > 0 ");
-        return sql.toString();
+    private String SqlProductsByIDCategory(int id) {
+        String sql = "SELECT * FROM product WHERE category_id = " + id;
+        return sql;
     }
 
     private String SqlProductsPaginate(int id, int start, int totalProductsInPage) {
-        StringBuffer sql = SqlProductsByIDCategory(id);
-        sql.append("LIMIT " + start + ", " + totalProductsInPage);
-        return sql.toString();
+        String sql = "SELECT * FROM product " + "LIMIT " + start + ", " + totalProductsInPage;
+        return sql;
     }
 
     private void GetPriceMinMax(List<ProductDto> productDtos) {
         for (ProductDto item : productDtos) {
-            List<ProductOptions> productOptionsList = productOptionsDao.GetProductOptionsByIdProduct(item.getId());
             item.setPrice_max(item.getPrice());
-            item.setPrice_min(item.getPrice());
-            if (productOptionsList.size() == 0) continue;
-            for (ProductOptions option : productOptionsList) {
-                item.setPrice_max(Math.max(item.getPrice_max(), option.getPrice()));
-                item.setPrice_min(Math.min(item.getPrice_min(), option.getPrice()));
-            }
+            item.setPrice(item.getPrice() - item.getDiscount_money());
         }
     }
 
-    private void GetDiscountPrice(List<ProductDto> productDtos) {
-        for (ProductDto item : productDtos) {
-            if(item.getDiscount_id() == 0) continue;
-            Discount discount = discountDao.GetDiscountById(item.getDiscount_id());
-            if (discount.getDiscount_money() > 0) {
-                item.setDiscount_money(discount.getDiscount_money());
-                item.setDiscount_rate((double) Math.round((item.getDiscount_money() / item.getPrice() * 100) * 100) / 100);
-            }
+    private String SqlGetProductsByIdCategoryAndFilter(String price, String name, int id) {
+        String sql = "";
+        if (id != 0) sql = "SELECT * FROM product WHERE category_id = " + id;
+        else sql = "SELECT * FROM product";
 
-            if (discount.getDiscount_rate() > 0) {
-                item.setDiscount_rate(discount.getDiscount_rate());
-                item.setDiscount_money((int) (item.getDiscount_rate() / 100 * item.getPrice()));
-            }
+        sql = GetFilterSql(price, name, sql);
 
-            if (item.getDiscount_money() > item.getPrice()) {
-                item.setDiscount_money(0);
-            }
+        return sql;
+    }
 
-            if (item.getDiscount_rate() > 100) {
-                item.setDiscount_rate(100);
+    private String GetFilterSql(String price, String name, String sql) {
+        if (!price.equals("null")) {
+            sql += " ORDER BY price " + price;
+            if (!name.equals("null")) {
+                sql += ", name " + name;
+            }
+        } else {
+            if (!name.equals("null")) {
+                sql += "ORDER BY name " + name;
             }
         }
+        return sql;
     }
 
     public List<ProductDto> GetDataProduct() {
-        List<ProductDto> list = new ArrayList<ProductDto>();
-        String sql = SqlString().toString();
-        list = _jdbcTemplate.query(sql, new MapperProductDto());
+        String sql = "SELECT * FROM product";
+        List<ProductDto> list = _jdbcTemplate.query(sql, new MapperProductDto());
         GetPriceMinMax(list);
-        GetDiscountPrice(list);
         return list;
     }
 
     public ProductDto GetProductById(int id) {
         List<ProductDto> list = new ArrayList<ProductDto>();
-        String sql = SqlProductsByID(id).toString();
+        String sql = SqlProductsByID(id);
         list = _jdbcTemplate.query(sql, new MapperProductDto());
         GetPriceMinMax(list);
-        GetDiscountPrice(list);
+
         return list.get(0);
     }
 
@@ -135,7 +82,7 @@ public class ProductDao extends BaseDao {
         String sql = SqlProductsByIDCategory(id).toString();
         list = _jdbcTemplate.query(sql, new MapperProductDto());
         GetPriceMinMax(list);
-        GetDiscountPrice(list);
+
         return list;
     }
 
@@ -144,21 +91,13 @@ public class ProductDao extends BaseDao {
         String sql = SqlRelatedProductsByIDCategory(id);
         list = _jdbcTemplate.query(sql, new MapperProductDto());
         GetPriceMinMax(list);
-        GetDiscountPrice(list);
         return list;
     }
 
-    public List<ProductDto> GetDiscountProduct() {
-        List<ProductDto> list = new ArrayList<ProductDto>();
-        String sql = SqlDiscountProduct();
-        list = _jdbcTemplate.query(sql, new MapperProductDto());
-        GetPriceMinMax(list);
-        GetDiscountPrice(list);
-        return list;
-    }
 
     public List<ProductDto> GetDataProductsPaginate(int id, int start, int totalPage) {
         String sqlProductByID = SqlProductsByIDCategory(id).toString();
+        if (id == 0) sqlProductByID = "SELECT * FROM product";
         List<ProductDto> listProductsByID = _jdbcTemplate.query(sqlProductByID, new MapperProductDto());
 
         if (listProductsByID.size() > 0) {
@@ -170,5 +109,66 @@ public class ProductDao extends BaseDao {
         return null;
     }
 
+    public List<ProductDto> SearchByName(String keyWord, String price, String name, String category) {
+        String sql = "SELECT * FROM product WHERE name LIKE '%" + keyWord + "%'";
+        if (!category.equals("null"))
+            sql += " AND category_id = " + category;
+
+        sql = GetFilterSql(price, name, sql);
+
+        List<ProductDto> products = _jdbcTemplate.query(sql, new MapperProductDto());
+        return products;
+    }
+
+    public List<ProductDto> GetProductByIdCategoryAndFilter(String price, String name, int id) {
+        String sql = SqlGetProductsByIdCategoryAndFilter(price, name, id);
+
+        List<ProductDto> products = _jdbcTemplate.query(sql, new MapperProductDto());
+        return products;
+    }
+
+    public List<ProductDto> GetProductsPaginate(String price, String name, int id, int start, int totalProductsInPage) {
+        String sql = SqlGetProductsByIdCategoryAndFilter(price, name, id);
+
+        sql += " LIMIT " + start + ", " + totalProductsInPage;
+        List<ProductDto> products = _jdbcTemplate.query(sql, new MapperProductDto());
+        return products;
+    }
+
+    public List<ProductDto> GetAllProduct() {
+        String sql = "SELECT * FROM product";
+        List<ProductDto> products = _jdbcTemplate.query(sql, new MapperProductDto());
+        return products;
+    }
+
+    public void AddProduct(ProductDto productDto) {
+        //INSERT INTO `kimurastore`.`product` (`category_id`, `name`, `price`, `detail`, `discount_money`, `discount_rate`, `image`) VALUES ('1', 'abc', '123123', 'aaaa', '5', '1400', 'imtem1.jpg');
+        String sql = "INSERT INTO product (category_id, name, price, detail, discount_money, discount_rate, image)" +
+                " VALUES (" +
+                productDto.getCategory_id() + ", '" +
+                productDto.getName() + "', " +
+                productDto.getPrice() + ", '" +
+                productDto.getDetail() + "', " +
+                productDto.getDiscount_money() + ", " +
+                productDto.getDiscount_rate() + ", '" +
+                productDto.getImage() +
+                "')";
+
+        _jdbcTemplate.update(sql);
+    }
+
+    public void DeleteProduct(int id) {
+        String sql = "DELETE FROM product WHERE id = " + id;
+        _jdbcTemplate.update(sql);
+    }
+
+    public void IncreaseQuantitySell(int productId, int addQuantity) {
+        String sql = "SELECT * FROM product WHERE id = " + productId;
+        List<ProductDto> products = _jdbcTemplate.query(sql, new MapperProductDto());
+        ProductDto product = products.get(0);
+        int quantity = product.getQuantity_sell() + addQuantity;
+        sql = "UPDATE product SET quantity_sell = " + quantity + " WHERE id = " + productId;
+        _jdbcTemplate.update(sql);
+    }
 
 }

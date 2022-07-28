@@ -1,0 +1,44 @@
+.user-info-wrap, .user-bill-wrap{
+    background-color:  white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.user-bill-wrap{
+    margin-top: 40px;
+}
+
+.user-info-wrap > p, .user-bill-wrap > p {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--red-color);
+}
+.user-infor-form{
+    font-size: 16px;
+}
+
+.user-infor-form-wrap > p,   .user-infor-form-wrap > a{
+    display: block;
+    margin-top: 20px;
+}
+
+.user-infor-form-wrap > p > span {
+    color: var(--text-color);
+}
+
+.user-infor-form-wrap > h2 {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--red-color);
+    padding-bottom: 20px;
+}
+
+.user-bill > p {
+    margin-top: 10px;
+    text-align: right;
+    font-size: 18px;
+}

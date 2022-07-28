@@ -27,7 +27,7 @@ public class CartDao extends BaseDao {
         return cartList.get(0);
     }
 
-    public void AddCart(int userId, int itemId) {
+    public void AddItemToCart(int userId, int itemId) {
         String sql = "SELECT * FROM cart WHERE user_id = " + userId;
         List<Cart> cart = _jdbcTemplate.query(sql, new MapperCart());
 
@@ -36,14 +36,14 @@ public class CartDao extends BaseDao {
             cart = _jdbcTemplate.query(sql, new MapperCart());
         }
 
-        cartItemDao.AddCart(cart.get(0).getId(), itemId);
+        cartItemDao.AddItemToCart(cart.get(0).getId(), itemId);
     }
 
-    public void DeleteCart(int userId, int itemId) {
+    public void DeleteItemFromCart(int userId, int itemId) {
         String sql = "SELECT * FROM cart WHERE user_id = " + userId;
         List<Cart> cart = _jdbcTemplate.query(sql, new MapperCart());
 
-        cartItemDao.DeleteCart(cart.get(0).getId(), itemId);
+        cartItemDao.DeleteItemFromCart(cart.get(0).getId(), itemId);
     }
 
     public void EditCart(int userId, int itemId, int quantity) {
@@ -60,6 +60,12 @@ public class CartDao extends BaseDao {
 
     public void CreateCart(int userId) {
         String sql = "INSERT INTO cart (user_id) values (" + userId + ")";
+        _jdbcTemplate.update(sql);
+    }
+
+    public void RemoveCart(int userId) {
+//        DELETE FROM `kimurastore`.`cart` WHERE (`id` = '8');
+        String sql = "DELETE FROM cart WHERE user_id = " + userId;
         _jdbcTemplate.update(sql);
     }
 }

@@ -35,9 +35,34 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    public List<ProductDto> GetProductByIdCategoryAndFilter(String price, String sort, int id) {
+        return productDao.GetProductByIdCategoryAndFilter(price, sort, id);
+    }
+
+    @Override
     public List<ProductDto> GetDataProductsPaginate(int id, int start, int totalProductsInPage) {
         List<ProductDto> products = productDao.GetDataProductsPaginate(id, start, totalProductsInPage);
         return products;
+    }
+
+    @Override
+    public List<ProductDto> GetProductsPaginate(String price, String sort, int id, int start, int totalProductsInPage) {
+        return productDao.GetProductsPaginate(price, sort, id, start, totalProductsInPage);
+    }
+
+    @Override
+    public void AddCategory(String category) {
+        categoryDao.AddCategory(category);
+    }
+
+    @Override
+    public void DeleteCategory(int id){
+        categoryDao.DeleteCategory(id);
+    }
+
+    @Override
+    public void UpdateCategory(int id, String name) {
+        categoryDao.UpdateCategory(id, name);
     }
 
 

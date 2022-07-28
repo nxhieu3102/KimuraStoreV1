@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="<c:url value="/assets/user/css/singup.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/allProduct.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/css/responsive.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/user-info.css" /> "/>
+    <link rel="stylesheet" href="<c:url value="/assets/user/css/forgot_password.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/font/1.3.0/css/line-awesome.css" /> "/>
     <link rel="stylesheet" href="<c:url value="/assets/user/font/1.3.0/css/line-awesome.min.css" />"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>

@@ -43,7 +43,7 @@
                 </li>
                 <c:forEach var="item" items="${category}">
                     <li class="category-bar__item">
-                        <a href="/the-loai-san-pham/${item.id}" class="category-bar__item-link">${item.name}</a>
+                        <a href="/the-loai-san-pham/${item.getId()}" class="category-bar__item-link">${item.getName()}</a>
                     </li>
                 </c:forEach>
 
@@ -60,31 +60,31 @@
             <div class="row product-event__list">
                 <c:forEach var="item" items="${bestSellerProduct}">
                     <div class="col l-2-4 m-4 c-6 best-seller__item">
-                        <a href="/chi-tiet-san-pham/${item.id}" class="product-event__item">
+                        <a href="/chi-tiet-san-pham/${item.getId()}" class="product-event__item">
                             <div class="product-event__item-img"
                                  style="background-image: url(<c:url value = "/assets/user/img/product/${item.image}"/>)"></div>
                             <h4 class="product-event__item-name">
-                                ${item.name}
+                                ${item.getName()}
                             </h4>
                             <div class="product-event__item-price">
                                 <c:choose>
-                                    <c:when test="${item.price_min != item.price_max}">
+                                    <c:when test="${item.getPrice() != item.getPrice_max()}">
                                         <fmt:formatNumber type="number"
                                                           groupingUsed="true"
-                                                          value="${item.price_min}"/>đ -
+                                                          value="${item.getPrice()}"/>đ -
                                         <fmt:formatNumber type="number"
                                                           groupingUsed="true"
-                                                          value="${item.price_max}"/>đ
+                                                          value="${item.getPrice_max()}"/>đ
                                     </c:when>
                                     <c:otherwise>
                                         <fmt:formatNumber type="number"
                                                           groupingUsed="true"
-                                                          value="${item.price}"/>đ
+                                                          value="${item.getPrice()}"/>đ
                                     </c:otherwise>
                                 </c:choose>
                             </div>
                             <div class="product-event__item-add">
-                                <form method="get" action="<c:url value="/AddCart/${item.id}" />" >
+                                <form method="get" action="<c:url value="/AddCart/${item.getId()}" />" >
                                     <button class="product-event__item-btn btn" type="submit">
                                         Thêm vào giỏ hàng
                                     </button>
@@ -116,10 +116,10 @@
                             <div class="product-event__item-price">
                                 <span class="product-event__item-price--old"><fmt:formatNumber type="number"
                                                                                                groupingUsed="true"
-                                                                                               value="${item.price}"/>đ</span>
+                                                                                               value="${item.getPrice_max()}"/>đ</span>
                                 <span class="product-event__item-price--new"><fmt:formatNumber type="number"
                                                                                                groupingUsed="true"
-                                                                                               value="${item.price - item.discount_money}"/>đ</span>
+                                                                                               value="${item.getPrice()}"/>đ</span>
                             </div>
                             <div class="product-event__item-add">
                                 <form method="get" action="<c:url value="/AddCart/${item.id}" />" >
@@ -129,7 +129,7 @@
                                 </form>
                             </div>
                             <div class="discount__label">
-                                <span class="discount__label-percent">${item.discount_rate}%</span>
+                                <span class="discount__label-percent">${item.getDiscount_rate()}%</span>
                                 <span class="discount__label-text"> GIẢM </span>
                             </div>
                         </a>

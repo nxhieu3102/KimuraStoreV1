@@ -36,7 +36,7 @@ public class PaginateServiceImpl implements IPaginatesService {
     private int checkCurrentPage(int currentPage, int totalPage) {
         if (currentPage < 1)
             return 1;
-        if (currentPage > totalPage)
+        if (currentPage > totalPage && totalPage > 0)
             return totalPage;
         return currentPage;
     }

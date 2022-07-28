@@ -11,8 +11,8 @@ public class HomeController extends BaseController {
     public ModelAndView Index() {
         _mvShare.addObject("slides", _homeService.GetDataSlide());
         _mvShare.addObject("category", _homeService.GetDataCategory());
-        _mvShare.addObject("discountProduct", _homeService.GetDiscountProduct());
         _mvShare.addObject("bestSellerProduct", _homeService.GetBestSellerProduct());
+        _mvShare.addObject("discountProduct",_homeService.GetDiscountProduct());
         _mvShare.setViewName("user/index");
         return _mvShare;
     }
