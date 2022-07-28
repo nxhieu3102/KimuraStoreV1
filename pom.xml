@@ -7,14 +7,7 @@
     <groupId>com.nxhieu3102.kimurastore</groupId>
     <artifactId>KimuraStore</artifactId>
     <version>1.0</version>
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <configuration>
-        <source>1.8</source>
-        <target>1.8</target>
-    </configuration>
-</plugin>
+
     <properties>
         <spring.verison>4.2.2.RELEASE</spring.verison>
         <maven.compiler.source>17</maven.compiler.source>
