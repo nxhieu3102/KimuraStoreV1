@@ -1,6 +1,5 @@
 package KimuraStore.Controller.User;
 
-import KimuraStore.Dao.UserDao;
 import KimuraStore.Entity.Cart;
 import KimuraStore.Entity.CartItem;
 import KimuraStore.Entity.User;
@@ -38,6 +37,7 @@ public class UserController extends BaseController {
             message = "Email này đã tồn tại";
         } else {
             message = "Đăng kí thành công";
+            user.setRole("customer");
             userService.AddAccount(user);
         }
 
