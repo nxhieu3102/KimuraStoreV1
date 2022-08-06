@@ -18,7 +18,7 @@
 
     <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://kimurastore.cqsg8ic72rmk.us-west-2.rds.amazonaws.com:3306/kimurastore?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true"/>
+        <property name="url" value="jdbc:mysql://awseb-e-qwiefjt75x-stack-awsebrdsdatabase-klbjyadl6wmx.cqsg8ic72rmk.us-west-2.rds.amazonaws.com:3306/kimurastore?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true"/>
         <property name="username" value="root"/>
         <property name="password" value="Nopainnogain:3"/>
     </bean>
