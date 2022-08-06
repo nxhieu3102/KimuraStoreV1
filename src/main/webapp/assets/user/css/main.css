@@ -185,7 +185,7 @@
     align-items: center;
     justify-content: space-between;
     -webkit-tap-highlight-color: transparent;
-
+    cursor: pointer;
 }
 
 .category__mobile-title{
@@ -216,6 +216,7 @@
     width: 220px;
     display: none;
     top: 100%;
+    cursor: pointer;
 }
 
 .category__bar-item--mobile-link{
@@ -374,4 +375,8 @@
     font-size: 1.2rem;
     line-height: 1.4rem;
     font-weight: 600;
+}
+
+.formLog{
+    width: 600px;
 }

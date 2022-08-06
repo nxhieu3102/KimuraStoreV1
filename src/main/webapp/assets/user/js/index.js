@@ -69,10 +69,10 @@ const app = {
         })
 
         $('.category__mobile-click').click(function () {
-            if ($('.category__bar--mobile').css('display') === "none")
-                $('.category__bar--mobile').css({ 'display': "block" });
-            else
+            if ($('.category__bar--mobile').css('display') === "block")
                 $('.category__bar--mobile').css({ 'display': "none" });
+            else
+                $('.category__bar--mobile').css({ 'display': "block" });
         })
 
         $('.contact').click(function () {
@@ -177,10 +177,6 @@ const app = {
     },
 
     checkBreakPoint: function () {
-        this.mobileResponsive(mobileBP);
-        mobileBP.addListener(this.mobileResponsive);
-        this.tabletResponsive(tabletBP);
-        tabletBP.addListener(this.mobileResponsive);
         this.mobileTabletResponsive(mobileTabletBP);
         mobileTabletBP.addListener(this.mobileTabletResponsive);
     },
