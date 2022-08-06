@@ -67,21 +67,9 @@
                                 ${item.getName()}
                             </h4>
                             <div class="product-event__item-price">
-                                <c:choose>
-                                    <c:when test="${item.getPrice() != item.getPrice_max()}">
-                                        <fmt:formatNumber type="number"
-                                                          groupingUsed="true"
-                                                          value="${item.getPrice()}"/>đ -
-                                        <fmt:formatNumber type="number"
-                                                          groupingUsed="true"
-                                                          value="${item.getPrice_max()}"/>đ
-                                    </c:when>
-                                    <c:otherwise>
-                                        <fmt:formatNumber type="number"
-                                                          groupingUsed="true"
-                                                          value="${item.getPrice()}"/>đ
-                                    </c:otherwise>
-                                </c:choose>
+                                <fmt:formatNumber type="number"
+                                                  groupingUsed="true"
+                                                  value="${item.getPrice()}"/>đ
                             </div>
                             <div class="product-event__item-add">
                                 <form method="get" action="<c:url value="/AddCart/${item.getId()}" />" >

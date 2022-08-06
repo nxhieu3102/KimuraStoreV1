@@ -101,8 +101,8 @@
                         <div class="form-group">
                             <label>Vai trò</label>
                             <select class="form-control" name="role" required>
-                                <option value="customer">Khách hàng</option>
-                                <option value="admin">Quản trị viên</option>
+                                <option value="customer">customer</option>
+                                <option value="admin">admin</option>
                             </select>
                         </div>
                     </div>
@@ -148,8 +148,8 @@
                     <div class="form-group">
                         <label>Vai trò</label>
                         <select class="form-control" name="role" required>
-                            <option value="customer">Khách hàng</option>
-                            <option value="admin">Quản trị viên</option>
+                            <option value="customer">customer</option>
+                            <option value="admin">admin</option>
                         </select>
                     </div>
                 </div>

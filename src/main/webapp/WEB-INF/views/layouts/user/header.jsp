@@ -29,7 +29,7 @@
         <div class="category__mobile">
             <div class="category__mobile-wrap">
                 <div class="category__mobile-header">
-                    <a href="./signin.html" class="category__mobile-title">Đăng Nhập</a>
+                    <a href="/dang-nhap" class="category__mobile-title">Đăng Nhập</a>
                     <label for="category__mobile-input" class="category__mobile-close">
                         <i class="fas fa-times"></i>
                     </label>
@@ -41,53 +41,17 @@
                     <a href="/" class="category__mobile-title">Trang chủ</a>
                 </div>
                 <div class="category__mobile-header">
-                    <a href="./allProduct.html" class="category__mobile-title">Tất cả sản phẩm</a>
+                    <a href="/the-loai-san-pham/0" class="category__mobile-title">Tất cả sản phẩm</a>
                 </div>
                 <div class="category__mobile-header category__mobile-click">
                     <span class="category__mobile-title">Danh mục</span>
                     <span class="category__mobile-icon-down"><i class="fas fa-chevron-down"></i></span>
                     <ul class="category__bar--mobile">
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Trang điểm</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Nước cân bằng da</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Giảm cân và chăm sóc sức khỏe</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Mặt nạ</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Tắm & chăm sóc cơ thể</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Dụng cụ làm đẹp</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Tinh chất dưỡng</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Kem dưỡng ẩm</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Sản phẩm dưỡng mắt</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Sửa rửa mặt</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Nhà cửa và đời sống: đồ dùng cá nhân
-                                & gia đình
-                            </a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Kem chống nắng</a>
-                        </li>
-                        <li class="category__bar-item--mobile">
-                            <a href="" class="category__bar-item--mobile-link">Đồ ăn</a>
-                        </li>
+                        <c:forEach var="item" items="${categoryHome}">
+                            <li class="category__bar-item--mobile">
+                                <a href="/the-loai-san-pham/${item.getId()}" class="category__bar-item--mobile-link">${item.getName()}</a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

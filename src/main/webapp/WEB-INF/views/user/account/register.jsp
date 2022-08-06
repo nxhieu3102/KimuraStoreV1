@@ -23,7 +23,7 @@
             <div class="singin-form-wrap">
                 <h1>Thông Tin Cá Nhân</h1>
                 <h1 style="font-size: 15px; color: var(--red-color); margin-top: 13px">${message_create_account}</h1>
-                <form:form method="post" action="/create-account" modelAttribute="user" style="width: 600px">
+                <form:form method="post" action="/create-account" modelAttribute="user" cssClass="formLog">
                     <div class="singin-form__infor">
                         <div class="form-infor-wrap">
                             <p>Họ Và Tên <span class="required">*</span></p>
