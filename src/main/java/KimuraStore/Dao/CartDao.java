@@ -1,15 +1,11 @@
 package KimuraStore.Dao;
 
-import KimuraStore.Dto.CartDto;
-import KimuraStore.Dto.ProductDto;
 import KimuraStore.Entity.Cart;
 import KimuraStore.Entity.Mapper.MapperCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class CartDao extends BaseDao {
@@ -64,7 +60,6 @@ public class CartDao extends BaseDao {
     }
 
     public void RemoveCart(int userId) {
-//        DELETE FROM `kimurastore`.`cart` WHERE (`id` = '8');
         String sql = "DELETE FROM cart WHERE user_id = " + userId;
         _jdbcTemplate.update(sql);
     }

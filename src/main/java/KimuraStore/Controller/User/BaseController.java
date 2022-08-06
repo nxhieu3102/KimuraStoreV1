@@ -11,9 +11,4 @@ public class BaseController {
     HomeServiceImpl _homeService;
     public ModelAndView _mvShare = new ModelAndView();
 
-//    @PostConstruct
-//    public ModelAndView Init() {
-//        _mvShare.addObject("menus", _homeService.GetDataMenus());
-//        return _mvShare;
-//    }
 }

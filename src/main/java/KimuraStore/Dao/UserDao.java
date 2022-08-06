@@ -78,7 +78,6 @@ public class UserDao extends BaseDao {
     }
 
     public void ChangeInfo(String name, String email, User user) {
-        //UPDATE `kimurastore`.`user` SET `email` = 'ab@gmail.com', `display_name` = 'hieu dz' WHERE (`id` = '12');
         int id = user.getId();
         String sql = "UPDATE user SET `email` = '" + email + "', `display_name` = '" + name + "' WHERE id = " + id;
         _jdbcTemplate.update(sql);
@@ -96,7 +95,6 @@ public class UserDao extends BaseDao {
     }
 
     public boolean EditUser(int id, String name, String email, String role) {
-        //UPDATE `kimurastore`.`user` SET `email` = 'aaa@gmail.com', `display_name` = 'Hiếu đẹp trai' WHERE (`id` = '13');
         String sql = "SELECT * FROM user WHERE email = '" + email + "'";
         List<User> user = _jdbcTemplate.query(sql, new MapperUser());
 

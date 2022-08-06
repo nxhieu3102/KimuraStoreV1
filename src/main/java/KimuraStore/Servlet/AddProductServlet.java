@@ -23,7 +23,7 @@ import java.sql.Statement;
 @WebServlet({"/uploadFile", "/edit/product/*"})
 public class AddProductServlet extends HttpServlet {
     private final String UPLOAD_DIRECTORY = "C:\\Users\\xuan hieu\\Desktop\\KimuraStoreV1\\src\\main\\webapp\\assets\\user\\img\\product";
-    private static String DB_URL = "jdbc:mysql://localhost:3306/kimurastore";
+    private static String DB_URL = "jdbc:mysql://awseb-e-qwiefjt75x-stack-awsebrdsdatabase-klbjyadl6wmx.cqsg8ic72rmk.us-west-2.rds.amazonaws.com:3306/kimurastore";
     private static String USER_NAME = "root";
     private static String PASSWORD = "Nopainnogain:3";
 

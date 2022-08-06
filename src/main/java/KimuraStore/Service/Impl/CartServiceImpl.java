@@ -1,13 +1,10 @@
 package KimuraStore.Service.Impl;
 
 import KimuraStore.Dao.CartDao;
-import KimuraStore.Dto.CartDto;
 import KimuraStore.Entity.Cart;
 import KimuraStore.Service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 
 @Service
 public class CartServiceImpl implements ICartService {

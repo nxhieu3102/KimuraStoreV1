@@ -27,19 +27,16 @@ public class CategoryDao extends BaseDao {
     }
 
     public void AddCategory(String category) {
-        //INSERT INTO `kimurastore`.`category` (`name`) VALUES ('Hàn quốc');
         String sql = "INSERT INTO category (`name`) VALUES ('"+category+"')";
         _jdbcTemplate.update(sql);
     }
 
     public void DeleteCategory(int id) {
-//        DELETE FROM `kimurastore`.`category` WHERE (`id` = '3');
         String sql = "DELETE FROM category WHERE id = " + id;
         _jdbcTemplate.update(sql);
     }
 
     public void UpdateCategory(int id, String name) {
-//        UPDATE `kimurastore`.`category` SET `name` = 'abc' WHERE (`id` = '1');
         String sql = "UPDATE category SET name = '" + name + "' WHERE id = " + id;
         _jdbcTemplate.update(sql);
     }

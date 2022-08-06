@@ -1,10 +1,7 @@
 package KimuraStore.Service;
 
-import KimuraStore.Dto.CartDto;
 import KimuraStore.Entity.Cart;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 
 @Service
 public interface ICartService {

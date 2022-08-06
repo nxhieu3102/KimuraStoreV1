@@ -26,10 +26,15 @@ public class AdminProductController {
     private ProductServiceImpl productService;
     @Autowired
     private ProductDao productDao;
+    private boolean checkUserIsAdminOrCustomer(HttpSession session) {
+        User user = (User)session.getAttribute("loginInfo");
+        if(user == null || user.getRole().equals("customer"))
+            return false;
+        return true;
+    }
     @RequestMapping(value = "/admin/product")
     public ModelAndView Index(HttpSession session) {
-        User user = (User)session.getAttribute("loginInfo");
-        if(user == null || user.getRole().equals("customer")){
+        if(!checkUserIsAdminOrCustomer(session)){
             return new ModelAndView("redirect:/");
         }
         ModelAndView mv = new ModelAndView("/admin/product");
@@ -49,8 +54,7 @@ public class AdminProductController {
 
     @RequestMapping(value = "/admin/product/delete/{id}")
     public String DeleteProduct(@PathVariable("id") int id, HttpSession session) {
-        User user = (User)session.getAttribute("loginInfo");
-        if(user == null || user.getRole().equals("customer")){
+        if(checkUserIsAdminOrCustomer(session)){
             return "redirect:/";
         }
         productDao.DeleteProduct(id);
@@ -59,8 +63,7 @@ public class AdminProductController {
 
     @RequestMapping(value = "/admin/product/edit/{id}", method = RequestMethod.GET)
     public ModelAndView EditProduct(@PathVariable("id") int id, HttpSession session) {
-        User user = (User)session.getAttribute("loginInfo");
-        if(user == null || user.getRole().equals("customer")){
+        if(checkUserIsAdminOrCustomer(session)){
             return new ModelAndView("redirect:/");
         }
         ModelAndView mv = new ModelAndView("/admin/product");

@@ -21,6 +21,15 @@ public class CategoryController extends BaseController {
     @Autowired
     private ProductServiceImpl productService;
 
+    private ModelAndView getModelAndView(@PathVariable int id, @RequestParam(required = false, name = "price", defaultValue = "null") String price, @RequestParam(required = false, name = "name", defaultValue = "null") String name, PaginatesDto paginatesInfo) {
+        _mvShare.addObject("category", categoryService.GetDataCategoryById(id));
+        _mvShare.addObject("idCategory", id);
+        _mvShare.addObject("paginateInfo", paginatesInfo);
+        _mvShare.addObject("ProductPaginate", categoryService.GetProductsPaginate(price, name, id, Math.max(paginatesInfo.getStart() - 1, 0), 12));
+
+        return _mvShare;
+    }
+
     @RequestMapping(value = "the-loai-san-pham/{id}")
     public ModelAndView Index(@PathVariable int id, @RequestParam(required = false, name = "price", defaultValue = "null") String price,
                               @RequestParam(required = false, name = "name", defaultValue = "null") String name) {
@@ -32,12 +41,7 @@ public class CategoryController extends BaseController {
 
         PaginatesDto paginatesInfo = paginateService.GetInfoPaginates(totalData, 12, 1);
 
-        _mvShare.addObject("category", categoryService.GetDataCategoryById(id));
-        _mvShare.addObject("idCategory", id);
-        _mvShare.addObject("paginateInfo", paginatesInfo);
-        _mvShare.addObject("ProductPaginate", categoryService.GetProductsPaginate(price, name, id, Math.max(paginatesInfo.getStart() - 1, 0), 12));
-
-        return _mvShare;
+        return getModelAndView(id, price, name, paginatesInfo);
     }
 
     @RequestMapping(value = "the-loai-san-pham/{id}/{currentPage}")
@@ -52,12 +56,7 @@ public class CategoryController extends BaseController {
 
         PaginatesDto paginatesInfo = paginateService.GetInfoPaginates(totalData, 12, currentPage);
 
-        _mvShare.addObject("category", categoryService.GetDataCategoryById(id));
-        _mvShare.addObject("idCategory", id);
-        _mvShare.addObject("paginateInfo", paginatesInfo);
-        _mvShare.addObject("ProductPaginate", categoryService.GetProductsPaginate(price, name, id, Math.max(paginatesInfo.getStart() - 1, 0), 12));
-
-        return _mvShare;
+        return getModelAndView(id, price, name, paginatesInfo);
     }
 
 

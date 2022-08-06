@@ -2,7 +2,6 @@ package KimuraStore.Dao;
 
 import KimuraStore.Dto.MapperProductDto;
 import KimuraStore.Dto.ProductDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -142,7 +141,6 @@ public class ProductDao extends BaseDao {
     }
 
     public void AddProduct(ProductDto productDto) {
-        //INSERT INTO `kimurastore`.`product` (`category_id`, `name`, `price`, `detail`, `discount_money`, `discount_rate`, `image`) VALUES ('1', 'abc', '123123', 'aaaa', '5', '1400', 'imtem1.jpg');
         String sql = "INSERT INTO product (category_id, name, price, detail, discount_money, discount_rate, image)" +
                 " VALUES (" +
                 productDto.getCategory_id() + ", '" +

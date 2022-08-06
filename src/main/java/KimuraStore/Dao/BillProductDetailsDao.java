@@ -15,14 +15,7 @@ public class BillProductDetailsDao extends BaseDao{
     @Autowired
     private CartItemDao cartItemDao;
 
-    public List<BillProductDetails> GetProductByBillId(int id){
-        String sql = "SELECT * FROM bill_product_details WHERE bill_id = " + id;
-        List<BillProductDetails> billProductDetails = _jdbcTemplate.query(sql, new MapperBillProductDetails());
-        return billProductDetails;
-    }
-
     public void AddProductDetails(int billId, int cartItemId){
-        //INSERT INTO `kimurastore`.`bill_product_details` (`bill_id`, `product_id`) VALUES ('1', '1');
         String sql = "INSERT INTO bill_product_details (`bill_id`, `cart_item_id`) VALUES " +
                 "(" + billId + ", " + cartItemId + ");";
         _jdbcTemplate.update(sql);
