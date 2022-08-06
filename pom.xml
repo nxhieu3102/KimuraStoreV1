@@ -10,10 +10,6 @@
 
     <properties>
         <spring.verison>4.2.2.RELEASE</spring.verison>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
-
     </properties>
 
     <dependencies>
@@ -113,6 +109,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.1.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
             </plugin>
         </plugins>
     </build>
