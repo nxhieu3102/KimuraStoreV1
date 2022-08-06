@@ -2,6 +2,7 @@
 
 This is my first Spring project, I use Spring MVC, Servlet, MySQL to build a website for selling product.
 
+Link: http://kimurastorev3-env.eba-bh9q2psk.us-west-2.elasticbeanstalk.com/
 ## Features
 - Login, logout, register, forget password
 - Search product by name, filter by category, sort by name and price
