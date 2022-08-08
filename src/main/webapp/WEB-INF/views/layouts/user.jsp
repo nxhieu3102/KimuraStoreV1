@@ -42,11 +42,12 @@
 
 <script type="text/javascript" src="<c:url value = "/assets/user/js/jquery-1.11.0.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value = "/assets/user/js/jquery-migrate-1.2.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" />"></script>
+
 <script type="text/javascript" src="<c:url value = "/assets/user/js/slick.min.js" />"></script>
 <script type="text/javascript" src="<c:url value = "/assets/user/js/index.js" />"></script>
-<decorator:getProperty property="page.script"></decorator:getProperty>
 
-
+<decorator:getProperty property="page.local_script"></decorator:getProperty>
 </body>
 
 
