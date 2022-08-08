@@ -166,3 +166,20 @@
     font-size: 1.6rem;
     color: var(--text-color);
 }
+
+.select-address-form{
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 8px;
+    font-size: 1.6rem;
+    height: 40px;
+    padding: 8px;
+    color: #333;
+    border-radius: 2px;
+    outline: none;
+}
+
+.select-address{
+    display: flex;
+    flex-direction: column;
+}
